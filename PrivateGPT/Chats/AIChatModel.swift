@@ -49,15 +49,32 @@ final class AIChatModel: ObservableObject {
     
     public func send(message in_text: String)  {
         Task {
-            let prompt = "<|im_start|>system\nYou are a helpful chatbot that answers questions.<|im_end|>\n<|im_start|>user\n" + in_text + "<|im_end|>\n<|im_start|>assistant"
-            await llamaState.complete(text: prompt)
+            var message = Message(sender: .system, text: "", tok_sec: 0)
+            self.messages.append(message)
+            let messageIndex = self.messages.endIndex - 1
             
-            var answer = llamaState.answer
-            if answer.hasPrefix(": ") {
-                answer = String(answer.dropFirst(2))
-            }
-            let resultMessage = Message(sender: .system, state: .predicted(totalSecond:1), text: answer, tok_sec: 0)
-            self.messages.append(resultMessage)
+            let prompt = "<|im_start|>system\nYou are a helpful chatbot that answers questions.<|im_end|>\n<|im_start|>user\n" + in_text + "<|im_end|>\n<|im_start|>assistant\n"
+            await llamaState.complete(
+                text: prompt,
+                { str in
+                    message.state = .predicting
+                    message.text += str
+                    
+                    var updatedMessages = self.messages
+                    updatedMessages[messageIndex] = message
+                    self.messages = updatedMessages
+//                    self.messages[messageIndex] = message
+                }
+            )
+            
+//            var answer = llamaState.answer
+//            if answer.hasPrefix(": ") {
+//                answer = String(answer.dropFirst(2))
+//            }
+//            let resultMessage = Message(sender: .system, state: .predicted(totalSecond:1), text: answer, tok_sec: 0)
+//            self.messages.append(resultMessage)
+            message.state = .predicted(totalSecond:0)
+            self.messages[messageIndex] = message
             llamaState.answer = ""
         }
         

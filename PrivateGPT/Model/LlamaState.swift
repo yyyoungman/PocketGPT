@@ -127,7 +127,7 @@ class LlamaState: ObservableObject {
     }
 
 
-    func complete(text: String) async {
+    func complete(text: String, _ tokenCallback: ((String)  -> ())?) async {
         guard let llamaContext else {
             return
         }
@@ -146,6 +146,9 @@ class LlamaState: ObservableObject {
             }
             messageLog += "\(result)"
             answer += "\(result)"
+            DispatchQueue.main.async {
+                tokenCallback?(result)
+            }
         }
 
         let t_end = DispatchTime.now().uptimeNanoseconds
