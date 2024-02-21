@@ -31,7 +31,7 @@ extension View {
 public struct LLMTextInput: View {
 
     private let messagePlaceholder: String
-//    @EnvironmentObject var aiChatModel: AIChatModel
+    @EnvironmentObject var aiChatModel: AIChatModel
     @State public var input_text: String = ""
     @State private var messageViewHeight: CGFloat = 0
     
@@ -91,7 +91,7 @@ public struct LLMTextInput: View {
                 sendMessageButtonPressed()
             },
             label: {
-                Label("send", systemImage: "paperplane")
+                Label("", systemImage: "paperplane")
 //                Image(systemName: aiChatModel.action_button_icon)
 ////                    .accessibilityLabel(String(localized: "SEND_MESSAGE", bundle: .module))
 //                    .font(.title2)
@@ -125,13 +125,14 @@ public struct LLMTextInput: View {
 //            }else
 //            {
 //                Task {
-//                    await aiChatModel.send(message: input_text)
-//                    input_text = ""
+                      /*await */aiChatModel.send(message: input_text)
+                      input_text = ""
 //                }
 //            }
         }
         
     }
+    
 
 }
 

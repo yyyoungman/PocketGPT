@@ -1,0 +1,412 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "A667178F-D07B-4001-9F92-5BED7C559D02"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "26D75BD5-28DE-4BC2-A79F-FEE564E21099"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PrivateGPT/Model/LlamaState.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "151"
+            endingLineNumber = "151"
+            landmarkName = "complete(text:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "26D75BD5-28DE-4BC2-A79F-FEE564E21099 - fa16b6c1a1954509"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(6) suspend resume partial function for PrivateGPT.LlamaState.complete(text: Swift.String) async -&gt; ()"
+                  moduleName = "PrivateGPT"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/chongyangming/PrivateGPT/PrivateGPT/Model/LlamaState.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "151"
+                  endingLineNumber = "151"
+                  offsetFromSymbolStart = "304">
+               </Location>
+               <Location
+                  uuid = "26D75BD5-28DE-4BC2-A79F-FEE564E21099 - 209e8dc78c7f818b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(8) suspend resume partial function for PrivateGPT.LlamaState.complete(text: Swift.String) async -&gt; ()"
+                  moduleName = "PrivateGPT"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/chongyangming/PrivateGPT/PrivateGPT/Model/LlamaState.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "151"
+                  endingLineNumber = "151"
+                  offsetFromSymbolStart = "376">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4D7D35B9-5787-4FE1-8D38-B2DF13FCCB5A"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PrivateGPT/Chats/AIChatModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
+            landmarkName = "send(message:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "4D7D35B9-5787-4FE1-8D38-B2DF13FCCB5A - 917ce248eb71677"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for closure #1 @Sendable () async -&gt; () in PrivateGPT.AIChatModel.send(message: Swift.String) -&gt; ()"
+                  moduleName = "PrivateGPT"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/chongyangming/PrivateGPT/PrivateGPT/Chats/AIChatModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "45"
+                  endingLineNumber = "45"
+                  offsetFromSymbolStart = "40">
+               </Location>
+               <Location
+                  uuid = "4D7D35B9-5787-4FE1-8D38-B2DF13FCCB5A - 2497e1554273df63"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(2) await resume partial function for closure #1 @Sendable () async -&gt; () in PrivateGPT.AIChatModel.send(message: Swift.String) -&gt; ()"
+                  moduleName = "PrivateGPT"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/chongyangming/PrivateGPT/PrivateGPT/Chats/AIChatModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "45"
+                  endingLineNumber = "45"
+                  offsetFromSymbolStart = "40">
+               </Location>
+               <Location
+                  uuid = "4D7D35B9-5787-4FE1-8D38-B2DF13FCCB5A - fa5c38741c2ad949"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for closure #1 @Sendable () async -&gt; () in PrivateGPT.AIChatModel.send(message: Swift.String) -&gt; ()"
+                  moduleName = "PrivateGPT"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/chongyangming/PrivateGPT/PrivateGPT/Chats/AIChatModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "45"
+                  endingLineNumber = "45"
+                  offsetFromSymbolStart = "36">
+               </Location>
+               <Location
+                  uuid = "4D7D35B9-5787-4FE1-8D38-B2DF13FCCB5A - 917ce248eb71677"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for closure #1 @Sendable () async -&gt; () in PrivateGPT.AIChatModel.send(message: Swift.String) -&gt; ()"
+                  moduleName = "PrivateGPT"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/chongyangming/PrivateGPT/PrivateGPT/Chats/AIChatModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "45"
+                  endingLineNumber = "45"
+                  offsetFromSymbolStart = "124">
+               </Location>
+               <Location
+                  uuid = "4D7D35B9-5787-4FE1-8D38-B2DF13FCCB5A - 917ce248eb7118f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for closure #1 @Sendable () async -&gt; () in PrivateGPT.AIChatModel.send(message: Swift.String) -&gt; ()"
+                  moduleName = "PrivateGPT"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/chongyangming/PrivateGPT/PrivateGPT/Chats/AIChatModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "53"
+                  endingLineNumber = "53"
+                  offsetFromSymbolStart = "320">
+               </Location>
+               <Location
+                  uuid = "4D7D35B9-5787-4FE1-8D38-B2DF13FCCB5A - 2497e1554273d89b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(2) await resume partial function for closure #1 @Sendable () async -&gt; () in PrivateGPT.AIChatModel.send(message: Swift.String) -&gt; ()"
+                  moduleName = "PrivateGPT"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/chongyangming/PrivateGPT/PrivateGPT/Chats/AIChatModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "53"
+                  endingLineNumber = "53"
+                  offsetFromSymbolStart = "40">
+               </Location>
+               <Location
+                  uuid = "4D7D35B9-5787-4FE1-8D38-B2DF13FCCB5A - fa5c38741c2adeb1"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for closure #1 @Sendable () async -&gt; () in PrivateGPT.AIChatModel.send(message: Swift.String) -&gt; ()"
+                  moduleName = "PrivateGPT"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/chongyangming/PrivateGPT/PrivateGPT/Chats/AIChatModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "53"
+                  endingLineNumber = "53"
+                  offsetFromSymbolStart = "116">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F273E9B0-E6B7-4F27-9E60-FE70BF529E58"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PrivateGPT/Model/LlamaState.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "142"
+            endingLineNumber = "142"
+            landmarkName = "complete(text:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "F273E9B0-E6B7-4F27-9E60-FE70BF529E58 - 5262b15757d5dd21"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for PrivateGPT.LlamaState.complete(text: Swift.String) async -&gt; ()"
+                  moduleName = "PrivateGPT"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/chongyangming/PrivateGPT/PrivateGPT/Model/LlamaState.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "142"
+                  endingLineNumber = "142"
+                  offsetFromSymbolStart = "672">
+               </Location>
+               <Location
+                  uuid = "F273E9B0-E6B7-4F27-9E60-FE70BF529E58 - b5aeb3ca45c33dfb"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(4) suspend resume partial function for PrivateGPT.LlamaState.complete(text: Swift.String) async -&gt; ()"
+                  moduleName = "PrivateGPT"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/chongyangming/PrivateGPT/PrivateGPT/Model/LlamaState.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "131"
+                  endingLineNumber = "131"
+                  offsetFromSymbolStart = "20">
+               </Location>
+               <Location
+                  uuid = "F273E9B0-E6B7-4F27-9E60-FE70BF529E58 - b5aeb3ca45c33b60"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(4) suspend resume partial function for PrivateGPT.LlamaState.complete(text: Swift.String) async -&gt; ()"
+                  moduleName = "PrivateGPT"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/chongyangming/PrivateGPT/PrivateGPT/Model/LlamaState.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "142"
+                  endingLineNumber = "142"
+                  offsetFromSymbolStart = "40">
+               </Location>
+               <Location
+                  uuid = "F273E9B0-E6B7-4F27-9E60-FE70BF529E58 - 98eab44eb3be1e3c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(5) suspend resume partial function for PrivateGPT.LlamaState.complete(text: Swift.String) async -&gt; ()"
+                  moduleName = "PrivateGPT"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/chongyangming/PrivateGPT/PrivateGPT/Model/LlamaState.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "131"
+                  endingLineNumber = "131"
+                  offsetFromSymbolStart = "24">
+               </Location>
+               <Location
+                  uuid = "F273E9B0-E6B7-4F27-9E60-FE70BF529E58 - 98eab44eb3be18a7"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(5) suspend resume partial function for PrivateGPT.LlamaState.complete(text: Swift.String) async -&gt; ()"
+                  moduleName = "PrivateGPT"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/chongyangming/PrivateGPT/PrivateGPT/Model/LlamaState.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "142"
+                  endingLineNumber = "142"
+                  offsetFromSymbolStart = "36">
+               </Location>
+               <Location
+                  uuid = "F273E9B0-E6B7-4F27-9E60-FE70BF529E58 - fa16b6c1a19546e6"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(6) suspend resume partial function for PrivateGPT.LlamaState.complete(text: Swift.String) async -&gt; ()"
+                  moduleName = "PrivateGPT"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/chongyangming/PrivateGPT/PrivateGPT/Model/LlamaState.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "142"
+                  endingLineNumber = "142"
+                  offsetFromSymbolStart = "92">
+               </Location>
+               <Location
+                  uuid = "F273E9B0-E6B7-4F27-9E60-FE70BF529E58 - 209e8dc78c7f8264"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(8) suspend resume partial function for PrivateGPT.LlamaState.complete(text: Swift.String) async -&gt; ()"
+                  moduleName = "PrivateGPT"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/chongyangming/PrivateGPT/PrivateGPT/Model/LlamaState.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "142"
+                  endingLineNumber = "142"
+                  offsetFromSymbolStart = "1164">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "459478A5-ECF4-4D61-BB7D-14971E648287"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PrivateGPT/Model/LlamaState.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "143"
+            endingLineNumber = "143"
+            landmarkName = "complete(text:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "459478A5-ECF4-4D61-BB7D-14971E648287 - fa16b6c1a1954601"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(6) suspend resume partial function for PrivateGPT.LlamaState.complete(text: Swift.String) async -&gt; ()"
+                  moduleName = "PrivateGPT"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/chongyangming/PrivateGPT/PrivateGPT/Model/LlamaState.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "143"
+                  endingLineNumber = "143"
+                  offsetFromSymbolStart = "180">
+               </Location>
+               <Location
+                  uuid = "459478A5-ECF4-4D61-BB7D-14971E648287 - dd528b449f80a2be"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(7) suspend resume partial function for PrivateGPT.LlamaState.complete(text: Swift.String) async -&gt; ()"
+                  moduleName = "PrivateGPT"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/chongyangming/PrivateGPT/PrivateGPT/Model/LlamaState.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "131"
+                  endingLineNumber = "131"
+                  offsetFromSymbolStart = "24">
+               </Location>
+               <Location
+                  uuid = "459478A5-ECF4-4D61-BB7D-14971E648287 - dd528b449f80a4c2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(7) suspend resume partial function for PrivateGPT.LlamaState.complete(text: Swift.String) async -&gt; ()"
+                  moduleName = "PrivateGPT"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/chongyangming/PrivateGPT/PrivateGPT/Model/LlamaState.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "143"
+                  endingLineNumber = "143"
+                  offsetFromSymbolStart = "36">
+               </Location>
+               <Location
+                  uuid = "459478A5-ECF4-4D61-BB7D-14971E648287 - 209e8dc78c7f8283"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(8) suspend resume partial function for PrivateGPT.LlamaState.complete(text: Swift.String) async -&gt; ()"
+                  moduleName = "PrivateGPT"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/chongyangming/PrivateGPT/PrivateGPT/Model/LlamaState.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "143"
+                  endingLineNumber = "143"
+                  offsetFromSymbolStart = "132">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "166C6B8B-3283-4245-9EBD-4EF1CAD455F2"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PrivateGPT/Model/LlamaState.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "147"
+            endingLineNumber = "147"
+            landmarkName = "complete(text:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "41790DEC-E6DD-4376-95BE-72EDE6A359CA"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PrivateGPT/Chats/LLMTextInput.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "129"
+            endingLineNumber = "129"
+            landmarkName = "sendMessageButtonPressed()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

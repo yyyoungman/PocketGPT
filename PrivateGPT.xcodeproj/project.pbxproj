@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		253DFFD02B85D43000D3BFD1 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 253DFFCF2B85D43000D3BFD1 /* Accelerate.framework */; };
+		253DFFD22B85D43500D3BFD1 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 253DFFD12B85D43500D3BFD1 /* Metal.framework */; };
+		253DFFD52B85D60A00D3BFD1 /* llama in Frameworks */ = {isa = PBXBuildFile; productRef = 253DFFD42B85D60A00D3BFD1 /* llama */; };
+		2575C7DE2B85C4C300E832C3 /* AIChatModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2575C7DD2B85C4C300E832C3 /* AIChatModel.swift */; };
+		2575C7E12B85C82B00E832C3 /* LlamaState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2575C7E02B85C82B00E832C3 /* LlamaState.swift */; };
+		2575C7E32B85C92700E832C3 /* LibLlama.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2575C7E22B85C92700E832C3 /* LibLlama.swift */; };
 		E4EB1CAB2B84EF5B003DFB9B /* PrivateGPTApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EB1CAA2B84EF5B003DFB9B /* PrivateGPTApp.swift */; };
 		E4EB1CAF2B84EF60003DFB9B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E4EB1CAE2B84EF60003DFB9B /* Assets.xcassets */; };
 		E4EB1CB22B84EF60003DFB9B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E4EB1CB12B84EF60003DFB9B /* Preview Assets.xcassets */; };
@@ -17,6 +23,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		253DFFCF2B85D43000D3BFD1 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		253DFFD12B85D43500D3BFD1 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
+		2575C7DD2B85C4C300E832C3 /* AIChatModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIChatModel.swift; sourceTree = "<group>"; };
+		2575C7E02B85C82B00E832C3 /* LlamaState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LlamaState.swift; sourceTree = "<group>"; };
+		2575C7E22B85C92700E832C3 /* LibLlama.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibLlama.swift; sourceTree = "<group>"; };
 		E4EB1CA72B84EF5B003DFB9B /* PrivateGPT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PrivateGPT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4EB1CAA2B84EF5B003DFB9B /* PrivateGPTApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateGPTApp.swift; sourceTree = "<group>"; };
 		E4EB1CAE2B84EF60003DFB9B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -32,17 +43,39 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				253DFFD52B85D60A00D3BFD1 /* llama in Frameworks */,
+				253DFFD22B85D43500D3BFD1 /* Metal.framework in Frameworks */,
+				253DFFD02B85D43000D3BFD1 /* Accelerate.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		253DFFCC2B85D0C000D3BFD1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				253DFFD12B85D43500D3BFD1 /* Metal.framework */,
+				253DFFCF2B85D43000D3BFD1 /* Accelerate.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2575C7DF2B85C81D00E832C3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2575C7E02B85C82B00E832C3 /* LlamaState.swift */,
+				2575C7E22B85C92700E832C3 /* LibLlama.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		E4EB1C9E2B84EF5B003DFB9B = {
 			isa = PBXGroup;
 			children = (
 				E4EB1CA92B84EF5B003DFB9B /* PrivateGPT */,
 				E4EB1CA82B84EF5B003DFB9B /* Products */,
+				253DFFCC2B85D0C000D3BFD1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -57,6 +90,7 @@
 		E4EB1CA92B84EF5B003DFB9B /* PrivateGPT */ = {
 			isa = PBXGroup;
 			children = (
+				2575C7DF2B85C81D00E832C3 /* Model */,
 				E4EB1CB82B84F01D003DFB9B /* Chats */,
 				E4EB1CAA2B84EF5B003DFB9B /* PrivateGPTApp.swift */,
 				E4EB1CAE2B84EF60003DFB9B /* Assets.xcassets */,
@@ -80,6 +114,7 @@
 				E4EB1CBB2B84F216003DFB9B /* MessageView.swift */,
 				E4EB1CBD2B84F251003DFB9B /* Message.swift */,
 				E4EB1CBF2B84F272003DFB9B /* LLMTextInput.swift */,
+				2575C7DD2B85C4C300E832C3 /* AIChatModel.swift */,
 			);
 			path = Chats;
 			sourceTree = "<group>";
@@ -100,6 +135,9 @@
 			dependencies = (
 			);
 			name = PrivateGPT;
+			packageProductDependencies = (
+				253DFFD42B85D60A00D3BFD1 /* llama */,
+			);
 			productName = PrivateGPT;
 			productReference = E4EB1CA72B84EF5B003DFB9B /* PrivateGPT.app */;
 			productType = "com.apple.product-type.application";
@@ -128,6 +166,9 @@
 				Base,
 			);
 			mainGroup = E4EB1C9E2B84EF5B003DFB9B;
+			packageReferences = (
+				253DFFD32B85D60A00D3BFD1 /* XCRemoteSwiftPackageReference "llama" */,
+			);
 			productRefGroup = E4EB1CA82B84EF5B003DFB9B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -157,8 +198,11 @@
 				E4EB1CBC2B84F216003DFB9B /* MessageView.swift in Sources */,
 				E4EB1CC02B84F272003DFB9B /* LLMTextInput.swift in Sources */,
 				E4EB1CBE2B84F251003DFB9B /* Message.swift in Sources */,
+				2575C7DE2B85C4C300E832C3 /* AIChatModel.swift in Sources */,
 				E4EB1CBA2B84F0CC003DFB9B /* ChatView.swift in Sources */,
 				E4EB1CAB2B84EF5B003DFB9B /* PrivateGPTApp.swift in Sources */,
+				2575C7E12B85C82B00E832C3 /* LlamaState.swift in Sources */,
+				2575C7E32B85C92700E832C3 /* LibLlama.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -203,6 +247,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -266,6 +311,7 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -294,6 +340,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"PrivateGPT/Preview Content\"";
 				DEVELOPMENT_TEAM = 2HTZ423MZ4;
 				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -323,6 +370,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"PrivateGPT/Preview Content\"";
 				DEVELOPMENT_TEAM = 2HTZ423MZ4;
 				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -364,6 +412,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		253DFFD32B85D60A00D3BFD1 /* XCRemoteSwiftPackageReference "llama" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ggerganov/llama.cpp";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		253DFFD42B85D60A00D3BFD1 /* llama */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 253DFFD32B85D60A00D3BFD1 /* XCRemoteSwiftPackageReference "llama" */;
+			productName = llama;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = E4EB1C9F2B84EF5B003DFB9B /* Project object */;
 }

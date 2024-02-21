@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ChatView: View {
     
-//    @EnvironmentObject var aiChatModel: AIChatModel
+    @EnvironmentObject var aiChatModel: AIChatModel
 //    @EnvironmentObject var orientationInfo: OrientationInfo
     
     @State var placeholderString: String = "Type your message..."
@@ -37,8 +37,6 @@ struct ChatView: View {
     
     @Namespace var bottomID
     
-    @State var messages: [Message] = []
-    
     
     
     @FocusState
@@ -56,8 +54,8 @@ struct ChatView: View {
         if scroll_bug {
             return
         }
-        let last_msg = "" //aiChatModel.messages.last // try to fixscrolling and  specialized Array._checkSubscript(_:wasNativeTypeChecked:)
-        if last_msg != nil /*&& last_msg?.id != nil*/ && scrollProxy != nil{
+        let last_msg = aiChatModel.messages.last // try to fixscrolling and  specialized Array._checkSubscript(_:wasNativeTypeChecked:)
+        if last_msg != nil && last_msg?.id != nil && scrollProxy != nil{
             if with_animation{
                 withAnimation {
                     //                    scrollProxy?.scrollTo(last_msg?.id, anchor: .bottom)
@@ -132,7 +130,7 @@ struct ChatView: View {
             ScrollViewReader { scrollView in
                 VStack {
                     List {
-                        ForEach(messages, id: \.id) { message in
+                        ForEach(aiChatModel.messages, id: \.id) { message in
                             MessageView(message: message).id(message.id)
                         }
                         .listRowSeparator(.hidden)
@@ -208,7 +206,7 @@ struct ChatView: View {
             }
 //            .navigationTitle(aiChatModel.Title)
             
-            LLMTextInput(messagePlaceholder: placeholderString)/*.environmentObject(aiChatModel)*/
+            LLMTextInput(messagePlaceholder: placeholderString).environmentObject(aiChatModel)
             .focused($focusedField, equals: .firstName)
             
         }
