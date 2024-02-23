@@ -12,8 +12,11 @@ import os
 @MainActor
 final class AIChatModel: ObservableObject {
     @Published var messages: [Message] = []
+    @Published var AI_typing = 0
+
     private var llamaState = LlamaState()
     private var filename: String = "tinyllama-1.1b-1t-openorca.Q4_0.gguf"
+    public var chat_name = "chat1"
 
     private func getFileURL(filename: String) -> URL {
         FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent(filename)
@@ -38,6 +41,9 @@ final class AIChatModel: ObservableObject {
         } catch let err {
             print("Error: \(err.localizedDescription)")
         }
+        
+        self.messages = load_chat_history(self.chat_name+".json")!
+        self.AI_typing = -Int.random(in: 0..<100000)
     }
     /*
      tinyllama openorca q4
@@ -47,13 +53,42 @@ final class AIChatModel: ObservableObject {
      <|system|>\nYou are a helpful chatbot that answers questions.</s>\n<|user|>\nWhat is the largest animal on earth?</s>\n<|assistant|>
      */
     
+    private func getConversationPrompt(messages: [Message]) -> String
+    {
+        // generate prompt from the last n messages
+        let contextLength = 2
+        let numChats = contextLength * 2 + 1
+        var prompt = "<|im_start|>system\nThe following is a friendly conversation between a human and an AI. You are a helpful chatbot that answers questions. Chat history:\n"
+        let start = max(0, messages.count - numChats)
+        for i in start..<messages.count-1 {
+            let message = messages[i]
+            if message.sender == .user {
+                prompt += "user: " + message.text + "\n"
+            } else if message.sender == .system {
+                prompt += "assistant:" + message.text + "\n"
+            }
+        }
+        prompt += "<|im_end|>\n"
+        let message = messages[messages.count-1]
+        if message.sender == .user {
+            prompt += "<|im_start|>user\n" + message.text + "<|im_end|>\n"
+        }
+        prompt += "<|im_start|>assistant\n"
+        return prompt
+    }
+    
     public func send(message in_text: String)  {
+        let requestMessage = Message(sender: .user, state: .typed, text: in_text, tok_sec: 0)
+        self.messages.append(requestMessage)
+        self.AI_typing += 1  
+        
         Task {
+            let prompt = getConversationPrompt(messages: self.messages)
+            
             var message = Message(sender: .system, text: "", tok_sec: 0)
             self.messages.append(message)
             let messageIndex = self.messages.endIndex - 1
             
-            let prompt = "<|im_start|>system\nYou are a helpful chatbot that answers questions.<|im_end|>\n<|im_start|>user\n" + in_text + "<|im_end|>\n<|im_start|>assistant\n"
             await llamaState.complete(
                 text: prompt,
                 { str in
@@ -63,10 +98,11 @@ final class AIChatModel: ObservableObject {
                     var updatedMessages = self.messages
                     updatedMessages[messageIndex] = message
                     self.messages = updatedMessages
-//                    self.messages[messageIndex] = message
+                    self.AI_typing += 1
                 }
             )
-            
+//            save_chat_history(self.messages, self.chat_name+".json")
+
 //            var answer = llamaState.answer
 //            if answer.hasPrefix(": ") {
 //                answer = String(answer.dropFirst(2))
@@ -76,9 +112,7 @@ final class AIChatModel: ObservableObject {
             message.state = .predicted(totalSecond:0)
             self.messages[messageIndex] = message
             llamaState.answer = ""
+            self.AI_typing = 0
         }
-        
-        let requestMessage = Message(sender: .user, state: .typed, text: in_text, tok_sec: 0)
-        self.messages.append(requestMessage)
     }
 }

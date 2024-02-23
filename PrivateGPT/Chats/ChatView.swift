@@ -139,9 +139,9 @@ struct ChatView: View {
                     .listStyle(PlainListStyle())
                     .overlay(starOverlay, alignment: .bottomTrailing)
                 }
-//                .onChange(of: aiChatModel.AI_typing){ ai_typing in
-//                    scrollToBottom(with_animation: false)
-//                }
+                .onChange(of: aiChatModel.AI_typing){ ai_typing in
+                    scrollToBottom(with_animation: false)
+                }
                 
                 
                 .disabled(chat_selection == nil)

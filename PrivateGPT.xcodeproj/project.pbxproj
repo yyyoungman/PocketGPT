@@ -10,6 +10,7 @@
 		253DFFD02B85D43000D3BFD1 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 253DFFCF2B85D43000D3BFD1 /* Accelerate.framework */; };
 		253DFFD22B85D43500D3BFD1 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 253DFFD12B85D43500D3BFD1 /* Metal.framework */; };
 		253DFFD52B85D60A00D3BFD1 /* llama in Frameworks */ = {isa = PBXBuildFile; productRef = 253DFFD42B85D60A00D3BFD1 /* llama */; };
+		255521AD2B88880500E04438 /* FileHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255521AC2B88880500E04438 /* FileHelper.swift */; };
 		2575C7DE2B85C4C300E832C3 /* AIChatModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2575C7DD2B85C4C300E832C3 /* AIChatModel.swift */; };
 		2575C7E12B85C82B00E832C3 /* LlamaState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2575C7E02B85C82B00E832C3 /* LlamaState.swift */; };
 		2575C7E32B85C92700E832C3 /* LibLlama.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2575C7E22B85C92700E832C3 /* LibLlama.swift */; };
@@ -25,6 +26,7 @@
 /* Begin PBXFileReference section */
 		253DFFCF2B85D43000D3BFD1 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		253DFFD12B85D43500D3BFD1 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
+		255521AC2B88880500E04438 /* FileHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileHelper.swift; sourceTree = "<group>"; };
 		2575C7DD2B85C4C300E832C3 /* AIChatModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIChatModel.swift; sourceTree = "<group>"; };
 		2575C7E02B85C82B00E832C3 /* LlamaState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LlamaState.swift; sourceTree = "<group>"; };
 		2575C7E22B85C92700E832C3 /* LibLlama.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibLlama.swift; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				E4EB1CB92B84F0CC003DFB9B /* ChatView.swift */,
+				255521AC2B88880500E04438 /* FileHelper.swift */,
 				E4EB1CBB2B84F216003DFB9B /* MessageView.swift */,
 				E4EB1CBD2B84F251003DFB9B /* Message.swift */,
 				E4EB1CBF2B84F272003DFB9B /* LLMTextInput.swift */,
@@ -200,6 +203,7 @@
 				E4EB1CBE2B84F251003DFB9B /* Message.swift in Sources */,
 				2575C7DE2B85C4C300E832C3 /* AIChatModel.swift in Sources */,
 				E4EB1CBA2B84F0CC003DFB9B /* ChatView.swift in Sources */,
+				255521AD2B88880500E04438 /* FileHelper.swift in Sources */,
 				E4EB1CAB2B84EF5B003DFB9B /* PrivateGPTApp.swift in Sources */,
 				2575C7E12B85C82B00E832C3 /* LlamaState.swift in Sources */,
 				2575C7E32B85C92700E832C3 /* LibLlama.swift in Sources */,

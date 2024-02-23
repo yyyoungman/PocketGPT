@@ -139,7 +139,8 @@ class LlamaState: ObservableObject {
 
         messageLog += "\(text)"
 
-        while await llamaContext.n_cur < llamaContext.n_len {
+        let n_cur_initial = await llamaContext.n_cur
+        while await llamaContext.n_cur < llamaContext.n_len + n_cur_initial {
             let result = await llamaContext.completion_loop()
             if result == "" {
                 break
