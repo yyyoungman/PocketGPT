@@ -30,6 +30,13 @@ final class AIChatModel: ObservableObject {
     }
     
     public func load() {
+        do {
+            try llamaState.loadModelLlava()
+        } catch let err {
+            print("llava loading Error")
+        }
+        return
+        
         let fileURL = getFileURL(filename: filename)
         if !FileManager.default.fileExists(atPath: fileURL.path) {
             print("Error: \(fileURL.path) does not exist!")
@@ -89,7 +96,8 @@ final class AIChatModel: ObservableObject {
             self.messages.append(message)
             let messageIndex = self.messages.endIndex - 1
             
-            await llamaState.complete(
+            await llamaState.loadLlavaImage()
+            await llamaState.completeLlava(
                 text: prompt,
                 { str in
                     message.state = .predicting
@@ -101,14 +109,21 @@ final class AIChatModel: ObservableObject {
                     self.AI_typing += 1
                 }
             )
+            
+//            await llamaState.complete(
+//                text: prompt,
+//                { str in
+//                    message.state = .predicting
+//                    message.text += str
+//                    
+//                    var updatedMessages = self.messages
+//                    updatedMessages[messageIndex] = message
+//                    self.messages = updatedMessages
+//                    self.AI_typing += 1
+//                }
+//            )
 //            save_chat_history(self.messages, self.chat_name+".json")
-
-//            var answer = llamaState.answer
-//            if answer.hasPrefix(": ") {
-//                answer = String(answer.dropFirst(2))
-//            }
-//            let resultMessage = Message(sender: .system, state: .predicted(totalSecond:1), text: answer, tok_sec: 0)
-//            self.messages.append(resultMessage)
+            
             message.state = .predicted(totalSecond:0)
             self.messages[messageIndex] = message
             llamaState.answer = ""

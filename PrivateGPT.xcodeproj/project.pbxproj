@@ -14,6 +14,7 @@
 		2575C7E12B85C82B00E832C3 /* LlamaState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2575C7E02B85C82B00E832C3 /* LlamaState.swift */; };
 		2575C7E32B85C92700E832C3 /* LibLlama.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2575C7E22B85C92700E832C3 /* LibLlama.swift */; };
 		259BFD222B8F0D4B0067A427 /* llamaforked in Frameworks */ = {isa = PBXBuildFile; productRef = 259BFD212B8F0D4B0067A427 /* llamaforked */; };
+		259BFD242B8F5C6F0067A427 /* LibLlava.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259BFD232B8F5C6F0067A427 /* LibLlava.swift */; };
 		E4EB1CAB2B84EF5B003DFB9B /* PrivateGPTApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EB1CAA2B84EF5B003DFB9B /* PrivateGPTApp.swift */; };
 		E4EB1CAF2B84EF60003DFB9B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E4EB1CAE2B84EF60003DFB9B /* Assets.xcassets */; };
 		E4EB1CB22B84EF60003DFB9B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E4EB1CB12B84EF60003DFB9B /* Preview Assets.xcassets */; };
@@ -30,6 +31,7 @@
 		2575C7DD2B85C4C300E832C3 /* AIChatModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIChatModel.swift; sourceTree = "<group>"; };
 		2575C7E02B85C82B00E832C3 /* LlamaState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LlamaState.swift; sourceTree = "<group>"; };
 		2575C7E22B85C92700E832C3 /* LibLlama.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibLlama.swift; sourceTree = "<group>"; };
+		259BFD232B8F5C6F0067A427 /* LibLlava.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibLlava.swift; sourceTree = "<group>"; };
 		E4EB1CA72B84EF5B003DFB9B /* PrivateGPT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PrivateGPT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4EB1CAA2B84EF5B003DFB9B /* PrivateGPTApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateGPTApp.swift; sourceTree = "<group>"; };
 		E4EB1CAE2B84EF60003DFB9B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -68,6 +70,7 @@
 			children = (
 				2575C7E02B85C82B00E832C3 /* LlamaState.swift */,
 				2575C7E22B85C92700E832C3 /* LibLlama.swift */,
+				259BFD232B8F5C6F0067A427 /* LibLlava.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -199,6 +202,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				259BFD242B8F5C6F0067A427 /* LibLlava.swift in Sources */,
 				E4EB1CBC2B84F216003DFB9B /* MessageView.swift in Sources */,
 				E4EB1CC02B84F272003DFB9B /* LLMTextInput.swift in Sources */,
 				E4EB1CBE2B84F251003DFB9B /* Message.swift in Sources */,

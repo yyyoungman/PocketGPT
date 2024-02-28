@@ -25,6 +25,7 @@ class LlamaState: ObservableObject {
     let NS_PER_S = 1_000_000_000.0
 
     private var llamaContext: LlamaContext?
+    private var llavaContext: LlavaContext?
     private var defaultModelUrl: URL? {
         Bundle.main.url(forResource: "ggml-model", withExtension: "gguf", subdirectory: "models")
         // Bundle.main.url(forResource: "llama-2-7b-chat", withExtension: "Q2_K.gguf", subdirectory: "models")
@@ -113,14 +114,27 @@ class LlamaState: ObservableObject {
             messageLog += "Loading model...\n"
             llamaContext = try LlamaContext.create_context(path: modelUrl.path())
             messageLog += "Loaded model \(modelUrl.lastPathComponent)\n"
-
+            
             // Assuming that the model is successfully loaded, update the downloaded models
             updateDownloadedModels(modelName: modelUrl.lastPathComponent, status: "downloaded")
         } else {
             messageLog += "Load a model from the list below\n"
         }
     }
-
+        
+    func loadModelLlava() throws {
+        llavaContext = try LlavaContext.create_context(
+            model_path: getDocumentsDirectory().appendingPathComponent("MobileVLM-1.7B-ggml-model-q4_k.gguf").path(),
+            mmproj_path: getDocumentsDirectory().appendingPathComponent("MobileVLM-1.7B-mmproj-model-f16.gguf").path()
+        )
+    }
+    
+    func loadLlavaImage() async {
+        guard let llavaContext else {
+            return
+        }
+        await llavaContext.set_image(img_path: getDocumentsDirectory().appendingPathComponent("dogs.jpeg").path())
+    }
 
     private func updateDownloadedModels(modelName: String, status: String) {
         undownloadedModels.removeAll { $0.name == modelName }
@@ -163,6 +177,16 @@ class LlamaState: ObservableObject {
             Heat up took \(t_heat)s
             Generated \(tokens_per_second) t/s\n
             """
+    }
+    
+    func completeLlava(text: String, _ tokenCallback: ((String)  -> ())?) async {
+        guard let llavaContext else {
+            return
+        }
+        let result = await llavaContext.completion_loop(prompt: text)
+        DispatchQueue.main.async {
+            tokenCallback?(result)
+        }
     }
 
     func bench() async {
