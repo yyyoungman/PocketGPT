@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import llama
+import llamaforked
 
 enum LlamaError: Error {
     case couldNotInitializeContext
@@ -26,6 +26,14 @@ func llama_batch_add(_ batch: inout llama_batch, _ id: llama_token, _ pos: llama
     batch.logits  [Int(batch.n_tokens)] = logits ? 1 : 0
 
     batch.n_tokens += 1
+}
+
+func test_llava() {
+    var llava_context = llava_init("", "", "", 0)
+    var llava_image_embed = load_image(llava_context, "")
+    process_prompt(llava_context, llava_image_embed, "")
+    llava_free(llava_context, llava_image_embed)
+//    cym_func1()
 }
 
 actor LlamaContext {
