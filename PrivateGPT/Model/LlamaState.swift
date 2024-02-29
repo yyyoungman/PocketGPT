@@ -183,9 +183,18 @@ class LlamaState: ObservableObject {
         guard let llavaContext else {
             return
         }
-        let result = await llavaContext.completion_loop(prompt: text)
-        DispatchQueue.main.async {
-            tokenCallback?(result)
+        await llavaContext.completion_init(text: text)
+
+        var count = 0
+        while count < 128 {
+            let result = await llavaContext.completion_loop(prompt: text)
+            if result == "" || result == "</s>" {
+                break
+            }
+            DispatchQueue.main.async {
+                tokenCallback?(result)
+            }
+            count += 1
         }
     }
 

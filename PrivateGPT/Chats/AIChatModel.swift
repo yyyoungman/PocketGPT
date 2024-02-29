@@ -84,13 +84,20 @@ final class AIChatModel: ObservableObject {
         return prompt
     }
     
+    private func getConversationPromptLlava(messages: [Message]) -> String
+    {
+        let message = messages[messages.count-1]
+        return message.text
+    }
+    
     public func send(message in_text: String)  {
         let requestMessage = Message(sender: .user, state: .typed, text: in_text, tok_sec: 0)
         self.messages.append(requestMessage)
         self.AI_typing += 1  
         
         Task {
-            let prompt = getConversationPrompt(messages: self.messages)
+//            let prompt = getConversationPrompt(messages: self.messages)
+            let prompt = getConversationPromptLlava(messages: self.messages)
             
             var message = Message(sender: .system, text: "", tok_sec: 0)
             self.messages.append(message)

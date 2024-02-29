@@ -13,8 +13,8 @@
 		2575C7DE2B85C4C300E832C3 /* AIChatModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2575C7DD2B85C4C300E832C3 /* AIChatModel.swift */; };
 		2575C7E12B85C82B00E832C3 /* LlamaState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2575C7E02B85C82B00E832C3 /* LlamaState.swift */; };
 		2575C7E32B85C92700E832C3 /* LibLlama.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2575C7E22B85C92700E832C3 /* LibLlama.swift */; };
-		259BFD222B8F0D4B0067A427 /* llamaforked in Frameworks */ = {isa = PBXBuildFile; productRef = 259BFD212B8F0D4B0067A427 /* llamaforked */; };
 		259BFD242B8F5C6F0067A427 /* LibLlava.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259BFD232B8F5C6F0067A427 /* LibLlava.swift */; };
+		259BFD292B8FFD940067A427 /* llamaforked in Frameworks */ = {isa = PBXBuildFile; productRef = 259BFD282B8FFD940067A427 /* llamaforked */; };
 		E4EB1CAB2B84EF5B003DFB9B /* PrivateGPTApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EB1CAA2B84EF5B003DFB9B /* PrivateGPTApp.swift */; };
 		E4EB1CAF2B84EF60003DFB9B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E4EB1CAE2B84EF60003DFB9B /* Assets.xcassets */; };
 		E4EB1CB22B84EF60003DFB9B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E4EB1CB12B84EF60003DFB9B /* Preview Assets.xcassets */; };
@@ -32,6 +32,7 @@
 		2575C7E02B85C82B00E832C3 /* LlamaState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LlamaState.swift; sourceTree = "<group>"; };
 		2575C7E22B85C92700E832C3 /* LibLlama.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibLlama.swift; sourceTree = "<group>"; };
 		259BFD232B8F5C6F0067A427 /* LibLlava.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibLlava.swift; sourceTree = "<group>"; };
+		259BFD2A2B8FFDC70067A427 /* llamaforked */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = llamaforked; path = ../llamaforked; sourceTree = "<group>"; };
 		E4EB1CA72B84EF5B003DFB9B /* PrivateGPT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PrivateGPT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4EB1CAA2B84EF5B003DFB9B /* PrivateGPTApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateGPTApp.swift; sourceTree = "<group>"; };
 		E4EB1CAE2B84EF60003DFB9B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -47,7 +48,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				259BFD222B8F0D4B0067A427 /* llamaforked in Frameworks */,
+				259BFD292B8FFD940067A427 /* llamaforked in Frameworks */,
 				253DFFD22B85D43500D3BFD1 /* Metal.framework in Frameworks */,
 				253DFFD02B85D43000D3BFD1 /* Accelerate.framework in Frameworks */,
 			);
@@ -78,6 +79,7 @@
 		E4EB1C9E2B84EF5B003DFB9B = {
 			isa = PBXGroup;
 			children = (
+				259BFD2A2B8FFDC70067A427 /* llamaforked */,
 				E4EB1CA92B84EF5B003DFB9B /* PrivateGPT */,
 				E4EB1CA82B84EF5B003DFB9B /* Products */,
 				253DFFCC2B85D0C000D3BFD1 /* Frameworks */,
@@ -143,7 +145,7 @@
 			);
 			name = PrivateGPT;
 			packageProductDependencies = (
-				259BFD212B8F0D4B0067A427 /* llamaforked */,
+				259BFD282B8FFD940067A427 /* llamaforked */,
 			);
 			productName = PrivateGPT;
 			productReference = E4EB1CA72B84EF5B003DFB9B /* PrivateGPT.app */;
@@ -174,7 +176,7 @@
 			);
 			mainGroup = E4EB1C9E2B84EF5B003DFB9B;
 			packageReferences = (
-				259BFD202B8F0D4B0067A427 /* XCRemoteSwiftPackageReference "llama" */,
+				259BFD272B8FFD940067A427 /* XCRemoteSwiftPackageReference "llamaforked" */,
 			);
 			productRefGroup = E4EB1CA82B84EF5B003DFB9B /* Products */;
 			projectDirPath = "";
@@ -439,9 +441,9 @@
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		259BFD202B8F0D4B0067A427 /* XCRemoteSwiftPackageReference "llama" */ = {
+		259BFD272B8FFD940067A427 /* XCRemoteSwiftPackageReference "llamaforked" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/yyyoungman/llama.cpp";
+			repositoryURL = "https://github.com/yyyoungman/llamaforked";
 			requirement = {
 				branch = master;
 				kind = branch;
@@ -455,9 +457,9 @@
 			package = 25189CAF2B8B6C6B00661B92 /* XCLocalSwiftPackageReference "../llama.cpp" */;
 			productName = llamapack;
 		};
-		259BFD212B8F0D4B0067A427 /* llamaforked */ = {
+		259BFD282B8FFD940067A427 /* llamaforked */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 259BFD202B8F0D4B0067A427 /* XCRemoteSwiftPackageReference "llama" */;
+			package = 259BFD272B8FFD940067A427 /* XCRemoteSwiftPackageReference "llamaforked" */;
 			productName = llamaforked;
 		};
 /* End XCSwiftPackageProductDependency section */
