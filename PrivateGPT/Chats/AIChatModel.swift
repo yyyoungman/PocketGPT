@@ -89,9 +89,15 @@ final class AIChatModel: ObservableObject {
         let message = messages[messages.count-1]
         return message.text
     }
+
+    public func loadLlavaImage(base64: String) {
+        Task {
+            await llamaState.loadLlavaImage(base64: base64)
+        }
+    }
     
-    public func send(message in_text: String)  {
-        let requestMessage = Message(sender: .user, state: .typed, text: in_text, tok_sec: 0)
+    public func send(message in_text: String, image: Image? = nil)  {
+        let requestMessage = Message(sender: .user, state: .typed, text: in_text, tok_sec: 0, image: image)
         self.messages.append(requestMessage)
         self.AI_typing += 1  
         
@@ -103,7 +109,7 @@ final class AIChatModel: ObservableObject {
             self.messages.append(message)
             let messageIndex = self.messages.endIndex - 1
             
-            await llamaState.loadLlavaImage()
+            // await llamaState.loadLlavaImage()
             await llamaState.completeLlava(
                 text: prompt,
                 { str in

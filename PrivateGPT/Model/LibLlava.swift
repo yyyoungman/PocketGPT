@@ -24,8 +24,9 @@ actor LlavaContext {
         return LlavaContext(context: llava_cli_context)
     }
     
-    func set_image(img_path: String) {
-        llamaforked.load_image(context, img_path)
+    func set_image(base64: String) {
+        let img_prompt = "<img src=\"data:image/jpeg;base64," + base64 + "\">"
+        llamaforked.load_image(context, img_prompt)
     }
     
     func completion_init(text: String) {
@@ -41,6 +42,6 @@ actor LlavaContext {
     }
     
     func clear() {
-        llamaforked.llava_free(context)
+        llamaforked.llava_free(context, false)
     }
 }

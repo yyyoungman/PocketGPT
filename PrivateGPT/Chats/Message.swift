@@ -27,4 +27,5 @@ struct Message: Identifiable {
     var text: String
     var tok_sec: Double
     var header: String = ""
+    var image: Image?
 }

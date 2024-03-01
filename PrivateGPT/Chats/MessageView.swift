@@ -46,6 +46,10 @@ struct MessageView: View {
                             .font(.footnote)
                             .foregroundColor(Color.gray)
                     }
+                    message.image?
+                        .resizable()
+                        .scaledToFit()
+                        .frame(maxHeight: 200)
                     Text(message.text)
                         .textSelection(.enabled)
                 }

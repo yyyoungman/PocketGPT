@@ -129,11 +129,11 @@ class LlamaState: ObservableObject {
         )
     }
     
-    func loadLlavaImage() async {
+    func loadLlavaImage(base64: String) async {
         guard let llavaContext else {
             return
         }
-        await llavaContext.set_image(img_path: getDocumentsDirectory().appendingPathComponent("dogs.jpeg").path())
+        await llavaContext.set_image(base64: base64)
     }
 
     private func updateDownloadedModels(modelName: String, status: String) {
@@ -196,6 +196,8 @@ class LlamaState: ObservableObject {
             }
             count += 1
         }
+
+        await llavaContext.clear()
     }
 
     func bench() async {

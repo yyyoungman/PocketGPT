@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import PhotosUI
 
 public struct MessageInputViewHeightKey: PreferenceKey {
     /// Default height of 0.
@@ -34,29 +35,46 @@ public struct LLMTextInput: View {
     @EnvironmentObject var aiChatModel: AIChatModel
     @State public var input_text: String = ""
     @State private var messageViewHeight: CGFloat = 0
+
+    @State private var selectedItem: PhotosPickerItem?
+    @State private var selectedImage: Image?
     
     
     public var body: some View {
         HStack(alignment: .bottom) {
-            TextField(messagePlaceholder, text: $input_text, axis: .vertical)
-                .textFieldStyle(.plain)
-                .frame(maxWidth: .infinity)
-                .padding(.horizontal, 12)
-                .padding(.vertical, 8)
-                .background {
-                    RoundedRectangle(cornerRadius: 20)
+            PhotosPicker(selection: $selectedItem,
+                         matching: .images) {
+                Image(systemName: "photo")
+                    .font(.system(size: 30))
+            }
+
+            VStack {
+                selectedImage?
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 60, height: 60)
+                
+                TextField(messagePlaceholder, text: $input_text, axis: .vertical)
+                    .textFieldStyle(.plain)
+                    .frame(maxWidth: .infinity)
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 8)
+                    .background {
+                        RoundedRectangle(cornerRadius: 20)
 #if os(macOS)
-                        .stroke(Color(NSColor.systemGray), lineWidth: 0.2)
+                            .stroke(Color(NSColor.systemGray), lineWidth: 0.2)
 #else
-                        .stroke(Color(UIColor.systemGray2), lineWidth: 0.2)
+                            .stroke(Color(UIColor.systemGray2), lineWidth: 0.2)
 #endif
-                        .background {
-                            RoundedRectangle(cornerRadius: 20)
-                                .fill(.white.opacity(0.1))
-                        }
-                        .padding(.trailing, -42)
-                }
-                .lineLimit(1...5)
+                            .background {
+                                RoundedRectangle(cornerRadius: 20)
+                                    .fill(.white.opacity(0.1))
+                            }
+                            .padding(.trailing, -42)
+                    }
+                    .lineLimit(1...5)
+            }
+            
             Group {
                     sendButton
                         .disabled(input_text.isEmpty/* && !aiChatModel.predicting*/)
@@ -83,6 +101,17 @@ public struct LLMTextInput: View {
                 }
             }
             .messageInputViewHeight(messageViewHeight)
+            .onChange(of: selectedItem) {
+                Task {
+                    if let data = try? await selectedItem?.loadTransferable(type: Data.self) {
+                        if let uiImage = UIImage(data: data) {
+                            let base64 = uiImage.jpegData(compressionQuality: 1)?.base64EncodedString() ?? ""
+                            selectedImage = Image(uiImage: uiImage)
+                            aiChatModel.loadLlavaImage(base64: base64)
+                        }
+                    }
+                }
+            }
     }
     
     private var sendButton: some View {
@@ -125,8 +154,9 @@ public struct LLMTextInput: View {
 //            }else
 //            {
 //                Task {
-                      /*await */aiChatModel.send(message: input_text)
+                      /*await */aiChatModel.send(message: input_text, image: selectedImage)
                       input_text = ""
+                      selectedImage = nil
 //                }
 //            }
         }
