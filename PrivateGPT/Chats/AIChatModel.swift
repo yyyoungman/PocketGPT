@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import os
+import CoreML
 
 @MainActor
 final class AIChatModel: ObservableObject {
@@ -17,6 +18,8 @@ final class AIChatModel: ObservableObject {
     private var llamaState = LlamaState()
     private var filename: String = "tinyllama-1.1b-1t-openorca.Q4_0.gguf"
     public var chat_name = "chat1"
+    
+    var sdPipeline: StableDiffusionPipelineProtocol?
 
     private func getFileURL(filename: String) -> URL {
         FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent(filename)
@@ -24,19 +27,40 @@ final class AIChatModel: ObservableObject {
     
     init() {
         Task {
-            print("Loading model \(filename)...")
-            load()
+//            load()
+//            loadLlava()
+            loadSD()
         }
     }
     
-    public func load() {
+    public func loadSD() {
+        do {
+            let resourceURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("sd_turbo")
+            let configuration = MLModelConfiguration()
+            configuration.computeUnits = .cpuOnly//.cpuAndGPU
+            sdPipeline = try StableDiffusionPipeline(resourcesAt: resourceURL,
+                                                       controlNet: [],
+                                                       configuration: configuration,
+                                                       disableSafety: false,
+                                                       reduceMemory: true)
+            try sdPipeline!.loadResources()
+        } catch let err {
+            print("SD loading Error: \(err.localizedDescription)")
+        }
+        return
+    }
+    
+    public func loadLlava() {
         do {
             try llamaState.loadModelLlava()
         } catch let err {
-            print("llava loading Error")
+            print("llava loading Error: \(err.localizedDescription)")
         }
         return
+    }
         
+    public func load() {
+        print("Loading model \(filename)...")
         let fileURL = getFileURL(filename: filename)
         if !FileManager.default.fileExists(atPath: fileURL.path) {
             print("Error: \(fileURL.path) does not exist!")
@@ -89,11 +113,53 @@ final class AIChatModel: ObservableObject {
         let message = messages[messages.count-1]
         return message.text
     }
+    
+    private func getConversationPromptSD(messages: [Message]) -> String
+    {
+        let message = messages[messages.count-1]
+        return message.text
+    }
 
     public func loadLlavaImage(base64: String) {
         Task {
             await llamaState.loadLlavaImage(base64: base64)
         }
+    }
+    
+    private func sdGen(prompt: String) async -> Image? {
+        var config = StableDiffusionPipeline.Configuration(prompt: prompt)
+//        config.negativePrompt = negativePrompt
+        config.stepCount = 2
+//        config.seed = theSeed
+//        config.guidanceScale = guidanceScale
+        // config.guidanceScale = 0.1
+//        config.disableSafety = disableSafety
+        config.schedulerType = .dpmSolverMultistepScheduler
+        // config.schedulerType =  StableDiffusionScheduler.pndmScheduler.asStableDiffusionScheduler()
+        config.useDenoisedIntermediates = true
+        
+        var ret: Image? = nil
+        do {
+            let images = try sdPipeline!.generateImages(configuration: config) { progress in
+    //            sampleTimer.stop()
+    //            handleProgress(StableDiffusionProgress(progress: progress,
+    //                                                   previewIndices: previewIndices),
+    //                           sampleTimer: sampleTimer)
+    //            if progress.stepCount != progress.step {
+    //                sampleTimer.start()
+    //            }
+    //            return !canceled
+                return true
+            }
+            let image = images.compactMap({ $0 }).first
+            guard let image else {
+                return nil
+            }
+            ret = Image(uiImage: UIImage(cgImage: image))
+        } catch let err {
+            print("Error: \(err.localizedDescription)")
+        }
+        return ret
     }
     
     public func send(message in_text: String, image: Image? = nil)  {
@@ -103,25 +169,28 @@ final class AIChatModel: ObservableObject {
         
         Task {
 //            let prompt = getConversationPrompt(messages: self.messages)
-            let prompt = getConversationPromptLlava(messages: self.messages)
+//            let prompt = getConversationPromptLlava(messages: self.messages)
+            let prompt = getConversationPromptSD(messages: self.messages)
             
             var message = Message(sender: .system, text: "", tok_sec: 0)
             self.messages.append(message)
             let messageIndex = self.messages.endIndex - 1
             
-            // await llamaState.loadLlavaImage()
-            await llamaState.completeLlava(
-                text: prompt,
-                { str in
-                    message.state = .predicting
-                    message.text += str
-                    
-                    var updatedMessages = self.messages
-                    updatedMessages[messageIndex] = message
-                    self.messages = updatedMessages
-                    self.AI_typing += 1
-                }
-            )
+            message.image = await sdGen(prompt: prompt)
+            
+            
+//            await llamaState.completeLlava(
+//                text: prompt,
+//                { str in
+//                    message.state = .predicting
+//                    message.text += str
+//                    
+//                    var updatedMessages = self.messages
+//                    updatedMessages[messageIndex] = message
+//                    self.messages = updatedMessages
+//                    self.AI_typing += 1
+//                }
+//            )
             
 //            await llamaState.complete(
 //                text: prompt,

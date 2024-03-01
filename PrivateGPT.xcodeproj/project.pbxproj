@@ -15,6 +15,31 @@
 		2575C7E32B85C92700E832C3 /* LibLlama.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2575C7E22B85C92700E832C3 /* LibLlama.swift */; };
 		259BFD242B8F5C6F0067A427 /* LibLlava.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259BFD232B8F5C6F0067A427 /* LibLlava.swift */; };
 		259BFD292B8FFD940067A427 /* llamaforked in Frameworks */ = {isa = PBXBuildFile; productRef = 259BFD282B8FFD940067A427 /* llamaforked */; };
+		259BFD332B9203380067A427 /* BPETokenizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259BFD312B9203380067A427 /* BPETokenizer.swift */; };
+		259BFD342B9203380067A427 /* BPETokenizer+Reading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259BFD322B9203380067A427 /* BPETokenizer+Reading.swift */; };
+		259BFD4C2B9203430067A427 /* ResourceManaging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259BFD352B9203420067A427 /* ResourceManaging.swift */; };
+		259BFD4D2B9203430067A427 /* MultilingualTextEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259BFD362B9203420067A427 /* MultilingualTextEncoder.swift */; };
+		259BFD4E2B9203430067A427 /* CGImage+vImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259BFD372B9203420067A427 /* CGImage+vImage.swift */; };
+		259BFD4F2B9203430067A427 /* SafetyChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259BFD382B9203420067A427 /* SafetyChecker.swift */; };
+		259BFD502B9203430067A427 /* DPMSolverMultistepScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259BFD392B9203420067A427 /* DPMSolverMultistepScheduler.swift */; };
+		259BFD512B9203430067A427 /* StableDiffusionPipeline.Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259BFD3A2B9203420067A427 /* StableDiffusionPipeline.Configuration.swift */; };
+		259BFD522B9203430067A427 /* Encoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259BFD3B2B9203420067A427 /* Encoder.swift */; };
+		259BFD532B9203430067A427 /* Decoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259BFD3C2B9203420067A427 /* Decoder.swift */; };
+		259BFD542B9203430067A427 /* StableDiffusionXL+Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259BFD3D2B9203420067A427 /* StableDiffusionXL+Resources.swift */; };
+		259BFD552B9203430067A427 /* ManagedMLModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259BFD3E2B9203420067A427 /* ManagedMLModel.swift */; };
+		259BFD562B9203430067A427 /* StableDiffusionXLPipeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259BFD3F2B9203420067A427 /* StableDiffusionXLPipeline.swift */; };
+		259BFD572B9203430067A427 /* StableDiffusionPipeline+Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259BFD402B9203420067A427 /* StableDiffusionPipeline+Resources.swift */; };
+		259BFD582B9203430067A427 /* TorchRandomSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259BFD412B9203420067A427 /* TorchRandomSource.swift */; };
+		259BFD592B9203430067A427 /* NvRandomSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259BFD422B9203420067A427 /* NvRandomSource.swift */; };
+		259BFD5A2B9203430067A427 /* RandomSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259BFD432B9203420067A427 /* RandomSource.swift */; };
+		259BFD5B2B9203430067A427 /* ControlNet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259BFD442B9203420067A427 /* ControlNet.swift */; };
+		259BFD5C2B9203430067A427 /* StableDiffusionPipeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259BFD452B9203420067A427 /* StableDiffusionPipeline.swift */; };
+		259BFD5D2B9203430067A427 /* TextEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259BFD462B9203420067A427 /* TextEncoder.swift */; };
+		259BFD5E2B9203430067A427 /* TextEncoderXL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259BFD472B9203420067A427 /* TextEncoderXL.swift */; };
+		259BFD5F2B9203430067A427 /* Unet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259BFD482B9203420067A427 /* Unet.swift */; };
+		259BFD602B9203430067A427 /* SampleTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259BFD492B9203420067A427 /* SampleTimer.swift */; };
+		259BFD612B9203430067A427 /* NumPyRandomSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259BFD4A2B9203420067A427 /* NumPyRandomSource.swift */; };
+		259BFD622B9203430067A427 /* Scheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259BFD4B2B9203430067A427 /* Scheduler.swift */; };
 		E4EB1CAB2B84EF5B003DFB9B /* PrivateGPTApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EB1CAA2B84EF5B003DFB9B /* PrivateGPTApp.swift */; };
 		E4EB1CAF2B84EF60003DFB9B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E4EB1CAE2B84EF60003DFB9B /* Assets.xcassets */; };
 		E4EB1CB22B84EF60003DFB9B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E4EB1CB12B84EF60003DFB9B /* Preview Assets.xcassets */; };
@@ -33,6 +58,31 @@
 		2575C7E22B85C92700E832C3 /* LibLlama.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibLlama.swift; sourceTree = "<group>"; };
 		259BFD232B8F5C6F0067A427 /* LibLlava.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibLlava.swift; sourceTree = "<group>"; };
 		259BFD2A2B8FFDC70067A427 /* llamaforked */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = llamaforked; path = ../llamaforked; sourceTree = "<group>"; };
+		259BFD312B9203380067A427 /* BPETokenizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BPETokenizer.swift; sourceTree = "<group>"; };
+		259BFD322B9203380067A427 /* BPETokenizer+Reading.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BPETokenizer+Reading.swift"; sourceTree = "<group>"; };
+		259BFD352B9203420067A427 /* ResourceManaging.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourceManaging.swift; sourceTree = "<group>"; };
+		259BFD362B9203420067A427 /* MultilingualTextEncoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultilingualTextEncoder.swift; sourceTree = "<group>"; };
+		259BFD372B9203420067A427 /* CGImage+vImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGImage+vImage.swift"; sourceTree = "<group>"; };
+		259BFD382B9203420067A427 /* SafetyChecker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SafetyChecker.swift; sourceTree = "<group>"; };
+		259BFD392B9203420067A427 /* DPMSolverMultistepScheduler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DPMSolverMultistepScheduler.swift; sourceTree = "<group>"; };
+		259BFD3A2B9203420067A427 /* StableDiffusionPipeline.Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StableDiffusionPipeline.Configuration.swift; sourceTree = "<group>"; };
+		259BFD3B2B9203420067A427 /* Encoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Encoder.swift; sourceTree = "<group>"; };
+		259BFD3C2B9203420067A427 /* Decoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Decoder.swift; sourceTree = "<group>"; };
+		259BFD3D2B9203420067A427 /* StableDiffusionXL+Resources.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "StableDiffusionXL+Resources.swift"; sourceTree = "<group>"; };
+		259BFD3E2B9203420067A427 /* ManagedMLModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManagedMLModel.swift; sourceTree = "<group>"; };
+		259BFD3F2B9203420067A427 /* StableDiffusionXLPipeline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StableDiffusionXLPipeline.swift; sourceTree = "<group>"; };
+		259BFD402B9203420067A427 /* StableDiffusionPipeline+Resources.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "StableDiffusionPipeline+Resources.swift"; sourceTree = "<group>"; };
+		259BFD412B9203420067A427 /* TorchRandomSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TorchRandomSource.swift; sourceTree = "<group>"; };
+		259BFD422B9203420067A427 /* NvRandomSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NvRandomSource.swift; sourceTree = "<group>"; };
+		259BFD432B9203420067A427 /* RandomSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomSource.swift; sourceTree = "<group>"; };
+		259BFD442B9203420067A427 /* ControlNet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlNet.swift; sourceTree = "<group>"; };
+		259BFD452B9203420067A427 /* StableDiffusionPipeline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StableDiffusionPipeline.swift; sourceTree = "<group>"; };
+		259BFD462B9203420067A427 /* TextEncoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextEncoder.swift; sourceTree = "<group>"; };
+		259BFD472B9203420067A427 /* TextEncoderXL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextEncoderXL.swift; sourceTree = "<group>"; };
+		259BFD482B9203420067A427 /* Unet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Unet.swift; sourceTree = "<group>"; };
+		259BFD492B9203420067A427 /* SampleTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleTimer.swift; sourceTree = "<group>"; };
+		259BFD4A2B9203420067A427 /* NumPyRandomSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumPyRandomSource.swift; sourceTree = "<group>"; };
+		259BFD4B2B9203430067A427 /* Scheduler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scheduler.swift; sourceTree = "<group>"; };
 		E4EB1CA72B84EF5B003DFB9B /* PrivateGPT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PrivateGPT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4EB1CAA2B84EF5B003DFB9B /* PrivateGPTApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateGPTApp.swift; sourceTree = "<group>"; };
 		E4EB1CAE2B84EF60003DFB9B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -76,6 +126,54 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		259BFD2E2B9202D00067A427 /* StableDiffusion */ = {
+			isa = PBXGroup;
+			children = (
+				259BFD302B9203040067A427 /* tokenizer */,
+				259BFD2F2B9202FC0067A427 /* pipeline */,
+			);
+			path = StableDiffusion;
+			sourceTree = "<group>";
+		};
+		259BFD2F2B9202FC0067A427 /* pipeline */ = {
+			isa = PBXGroup;
+			children = (
+				259BFD372B9203420067A427 /* CGImage+vImage.swift */,
+				259BFD442B9203420067A427 /* ControlNet.swift */,
+				259BFD3C2B9203420067A427 /* Decoder.swift */,
+				259BFD392B9203420067A427 /* DPMSolverMultistepScheduler.swift */,
+				259BFD3B2B9203420067A427 /* Encoder.swift */,
+				259BFD3E2B9203420067A427 /* ManagedMLModel.swift */,
+				259BFD362B9203420067A427 /* MultilingualTextEncoder.swift */,
+				259BFD4A2B9203420067A427 /* NumPyRandomSource.swift */,
+				259BFD422B9203420067A427 /* NvRandomSource.swift */,
+				259BFD432B9203420067A427 /* RandomSource.swift */,
+				259BFD352B9203420067A427 /* ResourceManaging.swift */,
+				259BFD382B9203420067A427 /* SafetyChecker.swift */,
+				259BFD492B9203420067A427 /* SampleTimer.swift */,
+				259BFD4B2B9203430067A427 /* Scheduler.swift */,
+				259BFD3A2B9203420067A427 /* StableDiffusionPipeline.Configuration.swift */,
+				259BFD452B9203420067A427 /* StableDiffusionPipeline.swift */,
+				259BFD402B9203420067A427 /* StableDiffusionPipeline+Resources.swift */,
+				259BFD3D2B9203420067A427 /* StableDiffusionXL+Resources.swift */,
+				259BFD3F2B9203420067A427 /* StableDiffusionXLPipeline.swift */,
+				259BFD462B9203420067A427 /* TextEncoder.swift */,
+				259BFD472B9203420067A427 /* TextEncoderXL.swift */,
+				259BFD412B9203420067A427 /* TorchRandomSource.swift */,
+				259BFD482B9203420067A427 /* Unet.swift */,
+			);
+			path = pipeline;
+			sourceTree = "<group>";
+		};
+		259BFD302B9203040067A427 /* tokenizer */ = {
+			isa = PBXGroup;
+			children = (
+				259BFD312B9203380067A427 /* BPETokenizer.swift */,
+				259BFD322B9203380067A427 /* BPETokenizer+Reading.swift */,
+			);
+			path = tokenizer;
+			sourceTree = "<group>";
+		};
 		E4EB1C9E2B84EF5B003DFB9B = {
 			isa = PBXGroup;
 			children = (
@@ -97,6 +195,7 @@
 		E4EB1CA92B84EF5B003DFB9B /* PrivateGPT */ = {
 			isa = PBXGroup;
 			children = (
+				259BFD2E2B9202D00067A427 /* StableDiffusion */,
 				2575C7DF2B85C81D00E832C3 /* Model */,
 				E4EB1CB82B84F01D003DFB9B /* Chats */,
 				E4EB1CAA2B84EF5B003DFB9B /* PrivateGPTApp.swift */,
@@ -204,16 +303,41 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				259BFD582B9203430067A427 /* TorchRandomSource.swift in Sources */,
+				259BFD5F2B9203430067A427 /* Unet.swift in Sources */,
+				259BFD572B9203430067A427 /* StableDiffusionPipeline+Resources.swift in Sources */,
+				259BFD612B9203430067A427 /* NumPyRandomSource.swift in Sources */,
+				259BFD4D2B9203430067A427 /* MultilingualTextEncoder.swift in Sources */,
+				259BFD5B2B9203430067A427 /* ControlNet.swift in Sources */,
+				259BFD602B9203430067A427 /* SampleTimer.swift in Sources */,
+				259BFD592B9203430067A427 /* NvRandomSource.swift in Sources */,
+				259BFD622B9203430067A427 /* Scheduler.swift in Sources */,
+				259BFD342B9203380067A427 /* BPETokenizer+Reading.swift in Sources */,
+				259BFD512B9203430067A427 /* StableDiffusionPipeline.Configuration.swift in Sources */,
 				259BFD242B8F5C6F0067A427 /* LibLlava.swift in Sources */,
+				259BFD4E2B9203430067A427 /* CGImage+vImage.swift in Sources */,
+				259BFD5E2B9203430067A427 /* TextEncoderXL.swift in Sources */,
 				E4EB1CBC2B84F216003DFB9B /* MessageView.swift in Sources */,
 				E4EB1CC02B84F272003DFB9B /* LLMTextInput.swift in Sources */,
+				259BFD5A2B9203430067A427 /* RandomSource.swift in Sources */,
+				259BFD542B9203430067A427 /* StableDiffusionXL+Resources.swift in Sources */,
+				259BFD552B9203430067A427 /* ManagedMLModel.swift in Sources */,
 				E4EB1CBE2B84F251003DFB9B /* Message.swift in Sources */,
+				259BFD5D2B9203430067A427 /* TextEncoder.swift in Sources */,
+				259BFD332B9203380067A427 /* BPETokenizer.swift in Sources */,
 				2575C7DE2B85C4C300E832C3 /* AIChatModel.swift in Sources */,
 				E4EB1CBA2B84F0CC003DFB9B /* ChatView.swift in Sources */,
 				255521AD2B88880500E04438 /* FileHelper.swift in Sources */,
+				259BFD4C2B9203430067A427 /* ResourceManaging.swift in Sources */,
 				E4EB1CAB2B84EF5B003DFB9B /* PrivateGPTApp.swift in Sources */,
+				259BFD502B9203430067A427 /* DPMSolverMultistepScheduler.swift in Sources */,
+				259BFD5C2B9203430067A427 /* StableDiffusionPipeline.swift in Sources */,
 				2575C7E12B85C82B00E832C3 /* LlamaState.swift in Sources */,
+				259BFD562B9203430067A427 /* StableDiffusionXLPipeline.swift in Sources */,
 				2575C7E32B85C92700E832C3 /* LibLlama.swift in Sources */,
+				259BFD522B9203430067A427 /* Encoder.swift in Sources */,
+				259BFD532B9203430067A427 /* Decoder.swift in Sources */,
+				259BFD4F2B9203430067A427 /* SafetyChecker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

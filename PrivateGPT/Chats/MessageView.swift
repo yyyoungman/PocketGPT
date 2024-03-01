@@ -62,6 +62,10 @@ struct MessageView: View {
                 }.textSelection(.enabled)
             case .predicted(totalSecond: let totalSecond):
                 VStack(alignment: .leading) {
+                    message.image?
+                        .resizable()
+                        .scaledToFit()
+                        .frame(maxHeight: 200)
                     Text(message.text).textSelection(.enabled)
                     Text(String(format: "%.2f ses, %.2f t/s", totalSecond,message.tok_sec))
                         .font(.footnote)
