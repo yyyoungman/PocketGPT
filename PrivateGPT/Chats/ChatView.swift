@@ -37,6 +37,8 @@ struct ChatView: View {
     
     @Namespace var bottomID
     
+//    @State private var mode = "Chat"
+//    let modeList = ["Chat", "Image Creation"]
     
     
     @FocusState
@@ -116,6 +118,22 @@ struct ChatView: View {
     
     var body: some View {
         VStack{
+//            HStack {
+//                Spacer()
+//                
+//                Text("Current mode:")
+//                Picker("Choose mode", selection: $mode) {
+//                    ForEach(modeList, id: \.self) {
+//                        Text($0)
+//                    }
+//                }
+//                .pickerStyle(.menu)
+//                .onChange(of: mode) {
+//                    tag in print("Color tag: \(tag)") }
+//
+//                
+//                Spacer()
+//            }
             VStack{
 //                if aiChatModel.state == .loading{
 //                    VStack {

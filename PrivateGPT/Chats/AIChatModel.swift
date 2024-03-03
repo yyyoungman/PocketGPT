@@ -28,8 +28,8 @@ final class AIChatModel: ObservableObject {
     init() {
         Task {
 //            load()
-//            loadLlava()
-            loadSD()
+            loadLlava()
+//            loadSD()
         }
     }
     
@@ -169,29 +169,15 @@ final class AIChatModel: ObservableObject {
         
         Task {
 //            let prompt = getConversationPrompt(messages: self.messages)
-//            let prompt = getConversationPromptLlava(messages: self.messages)
-            let prompt = getConversationPromptSD(messages: self.messages)
+            let prompt = getConversationPromptLlava(messages: self.messages)
+//            let prompt = getConversationPromptSD(messages: self.messages)
             
             var message = Message(sender: .system, text: "", tok_sec: 0)
             self.messages.append(message)
             let messageIndex = self.messages.endIndex - 1
             
-            message.image = await sdGen(prompt: prompt)
             
-            
-//            await llamaState.completeLlava(
-//                text: prompt,
-//                { str in
-//                    message.state = .predicting
-//                    message.text += str
-//                    
-//                    var updatedMessages = self.messages
-//                    updatedMessages[messageIndex] = message
-//                    self.messages = updatedMessages
-//                    self.AI_typing += 1
-//                }
-//            )
-            
+            // 1. llama
 //            await llamaState.complete(
 //                text: prompt,
 //                { str in
@@ -206,6 +192,23 @@ final class AIChatModel: ObservableObject {
 //            )
 //            save_chat_history(self.messages, self.chat_name+".json")
             
+            // 2. llava
+            await llamaState.completeLlava(
+                text: prompt,
+                { str in
+                    message.state = .predicting
+                    message.text += str
+                    
+                    var updatedMessages = self.messages
+                    updatedMessages[messageIndex] = message
+                    self.messages = updatedMessages
+                    self.AI_typing += 1
+                }
+            )
+            
+            // 3. sd
+//            message.image = await sdGen(prompt: prompt)
+
             message.state = .predicted(totalSecond:0)
             self.messages[messageIndex] = message
             llamaState.answer = ""
