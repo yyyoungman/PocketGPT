@@ -40,6 +40,10 @@
 		259BFD602B9203430067A427 /* SampleTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259BFD492B9203420067A427 /* SampleTimer.swift */; };
 		259BFD612B9203430067A427 /* NumPyRandomSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259BFD4A2B9203420067A427 /* NumPyRandomSource.swift */; };
 		259BFD622B9203430067A427 /* Scheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259BFD4B2B9203430067A427 /* Scheduler.swift */; };
+		25D71D602B944C570027C9D3 /* LibWhisper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D71D5E2B944C570027C9D3 /* LibWhisper.swift */; };
+		25D71D612B944C570027C9D3 /* WhisperState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D71D5F2B944C570027C9D3 /* WhisperState.swift */; };
+		25D71D642B944C5F0027C9D3 /* RiffWaveUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D71D622B944C5F0027C9D3 /* RiffWaveUtils.swift */; };
+		25D71D652B944C5F0027C9D3 /* Recorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D71D632B944C5F0027C9D3 /* Recorder.swift */; };
 		E4EB1CAB2B84EF5B003DFB9B /* PrivateGPTApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EB1CAA2B84EF5B003DFB9B /* PrivateGPTApp.swift */; };
 		E4EB1CAF2B84EF60003DFB9B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E4EB1CAE2B84EF60003DFB9B /* Assets.xcassets */; };
 		E4EB1CB22B84EF60003DFB9B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E4EB1CB12B84EF60003DFB9B /* Preview Assets.xcassets */; };
@@ -83,6 +87,10 @@
 		259BFD492B9203420067A427 /* SampleTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleTimer.swift; sourceTree = "<group>"; };
 		259BFD4A2B9203420067A427 /* NumPyRandomSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumPyRandomSource.swift; sourceTree = "<group>"; };
 		259BFD4B2B9203430067A427 /* Scheduler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scheduler.swift; sourceTree = "<group>"; };
+		25D71D5E2B944C570027C9D3 /* LibWhisper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibWhisper.swift; sourceTree = "<group>"; };
+		25D71D5F2B944C570027C9D3 /* WhisperState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhisperState.swift; sourceTree = "<group>"; };
+		25D71D622B944C5F0027C9D3 /* RiffWaveUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RiffWaveUtils.swift; sourceTree = "<group>"; };
+		25D71D632B944C5F0027C9D3 /* Recorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recorder.swift; sourceTree = "<group>"; };
 		E4EB1CA72B84EF5B003DFB9B /* PrivateGPT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PrivateGPT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4EB1CAA2B84EF5B003DFB9B /* PrivateGPTApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateGPTApp.swift; sourceTree = "<group>"; };
 		E4EB1CAE2B84EF60003DFB9B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -174,6 +182,33 @@
 			path = tokenizer;
 			sourceTree = "<group>";
 		};
+		25D71D5B2B944B9E0027C9D3 /* Whisper */ = {
+			isa = PBXGroup;
+			children = (
+				25D71D5D2B944BC10027C9D3 /* ModelWrapper */,
+				25D71D5C2B944BBB0027C9D3 /* Utils */,
+			);
+			path = Whisper;
+			sourceTree = "<group>";
+		};
+		25D71D5C2B944BBB0027C9D3 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				25D71D632B944C5F0027C9D3 /* Recorder.swift */,
+				25D71D622B944C5F0027C9D3 /* RiffWaveUtils.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		25D71D5D2B944BC10027C9D3 /* ModelWrapper */ = {
+			isa = PBXGroup;
+			children = (
+				25D71D5E2B944C570027C9D3 /* LibWhisper.swift */,
+				25D71D5F2B944C570027C9D3 /* WhisperState.swift */,
+			);
+			path = ModelWrapper;
+			sourceTree = "<group>";
+		};
 		E4EB1C9E2B84EF5B003DFB9B = {
 			isa = PBXGroup;
 			children = (
@@ -195,6 +230,7 @@
 		E4EB1CA92B84EF5B003DFB9B /* PrivateGPT */ = {
 			isa = PBXGroup;
 			children = (
+				25D71D5B2B944B9E0027C9D3 /* Whisper */,
 				259BFD2E2B9202D00067A427 /* StableDiffusion */,
 				2575C7DF2B85C81D00E832C3 /* Model */,
 				E4EB1CB82B84F01D003DFB9B /* Chats */,
@@ -308,6 +344,7 @@
 				259BFD572B9203430067A427 /* StableDiffusionPipeline+Resources.swift in Sources */,
 				259BFD612B9203430067A427 /* NumPyRandomSource.swift in Sources */,
 				259BFD4D2B9203430067A427 /* MultilingualTextEncoder.swift in Sources */,
+				25D71D642B944C5F0027C9D3 /* RiffWaveUtils.swift in Sources */,
 				259BFD5B2B9203430067A427 /* ControlNet.swift in Sources */,
 				259BFD602B9203430067A427 /* SampleTimer.swift in Sources */,
 				259BFD592B9203430067A427 /* NvRandomSource.swift in Sources */,
@@ -317,8 +354,10 @@
 				259BFD242B8F5C6F0067A427 /* LibLlava.swift in Sources */,
 				259BFD4E2B9203430067A427 /* CGImage+vImage.swift in Sources */,
 				259BFD5E2B9203430067A427 /* TextEncoderXL.swift in Sources */,
+				25D71D652B944C5F0027C9D3 /* Recorder.swift in Sources */,
 				E4EB1CBC2B84F216003DFB9B /* MessageView.swift in Sources */,
 				E4EB1CC02B84F272003DFB9B /* LLMTextInput.swift in Sources */,
+				25D71D602B944C570027C9D3 /* LibWhisper.swift in Sources */,
 				259BFD5A2B9203430067A427 /* RandomSource.swift in Sources */,
 				259BFD542B9203430067A427 /* StableDiffusionXL+Resources.swift in Sources */,
 				259BFD552B9203430067A427 /* ManagedMLModel.swift in Sources */,
@@ -326,6 +365,7 @@
 				259BFD5D2B9203430067A427 /* TextEncoder.swift in Sources */,
 				259BFD332B9203380067A427 /* BPETokenizer.swift in Sources */,
 				2575C7DE2B85C4C300E832C3 /* AIChatModel.swift in Sources */,
+				25D71D612B944C570027C9D3 /* WhisperState.swift in Sources */,
 				E4EB1CBA2B84F0CC003DFB9B /* ChatView.swift in Sources */,
 				255521AD2B88880500E04438 /* FileHelper.swift in Sources */,
 				259BFD4C2B9203430067A427 /* ResourceManaging.swift in Sources */,
@@ -484,6 +524,8 @@
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Camera access for selecting images";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Microphone access for voice input";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -515,6 +557,8 @@
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Camera access for selecting images";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Microphone access for voice input";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

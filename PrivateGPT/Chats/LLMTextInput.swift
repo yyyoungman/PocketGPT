@@ -39,13 +39,18 @@ public struct LLMTextInput: View {
     @State private var selectedItem: PhotosPickerItem?
     @State private var selectedImage: Image?
     
+//    @State private var voiceIcon: Image = Image(systemName: "mic")
+//    @State private var isRecording: Bool = false
+    @StateObject var whisperState = WhisperState()
+    
     
     public var body: some View {
         HStack(alignment: .bottom) {
             PhotosPicker(selection: $selectedItem,
                          matching: .images) {
                 Image(systemName: "photo")
-                    .font(.system(size: 30))
+//                    .font(.system(size: 30))
+                        .offset(x: 0, y: -10)
             }
 
             VStack {
@@ -74,6 +79,8 @@ public struct LLMTextInput: View {
                     }
                     .lineLimit(1...5)
             }
+            
+            voiceButton
             
             Group {
                     sendButton
@@ -114,6 +121,26 @@ public struct LLMTextInput: View {
             }
     }
     
+    private var voiceButton: some View {
+        Button(
+            action: {
+                voiceButtonPressed()
+            },
+            label: {
+                whisperState.isRecording ? Image(systemName: "stop.circle.fill") : Image(systemName: "mic")
+            }
+        )
+        .buttonStyle(.borderless)
+            .offset(x: 0, y: -10)
+    }
+    
+    private func voiceButtonPressed() {
+        Task {
+            await whisperState.toggleRecord()
+            input_text += whisperState.messageLog
+        }
+    }
+    
     private var sendButton: some View {
         Button(
             action: {
@@ -132,7 +159,7 @@ public struct LLMTextInput: View {
             }
         )
         .buttonStyle(.borderless)
-            .offset(x: -5, y: -7)
+            .offset(x: 5, y: -10)
     }
     
     /// - Parameters:
