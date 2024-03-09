@@ -19,12 +19,13 @@ struct ChatView: View {
         case firstName, lastName
     }
     
-    @Binding var model_name: String
-    @Binding var chat_selection: Dictionary<String, String>?
-    @Binding var title: String
-    var close_chat: () -> Void
-    @Binding var add_chat_dialog:Bool
-    @Binding var edit_chat_dialog:Bool
+//    @Binding var model_name: String
+//    @Binding var chat_selection: Dictionary<String, String>?
+    @Binding var chat_title: String?
+//    @Binding var title: String
+//    var close_chat: () -> Void
+//    @Binding var add_chat_dialog:Bool
+//    @Binding var edit_chat_dialog:Bool
     @State private var reload_button_icon: String = "arrow.counterclockwise.circle"
     
     @State private var scrollProxy: ScrollViewProxy? = nil
@@ -71,21 +72,23 @@ struct ChatView: View {
         
     }
     
-    func reload() async{
-//        if chat_selection == nil {
-//            return
-//        }
+    func reload() {
+        guard let chat_title else {
+            return
+        }
 //        print(chat_selection)
-//        print("\nreload\n")
+        print("\nreload\n")
 //        aiChatModel.stop_predict()
-////        await aiChatModel.prepare(model_name,chat_selection!)
+//        await aiChatModel.prepare(model_name,chat_selection!)
 //        aiChatModel.model_name = model_name
 //        aiChatModel.chat_name = chat_selection!["chat"] ?? "Not selected"
-////        title = chat_selection!["title"] ?? ""
+//        title = chat_selection!["title"] ?? ""
 //        aiChatModel.Title = chat_selection!["title"] ?? ""
 //        aiChatModel.messages = []
 //        aiChatModel.messages = load_chat_history(chat_selection!["chat"]!+".json")!
 //        aiChatModel.AI_typing = -Int.random(in: 0..<100000)
+//        aiChatModel.chat_name = chat_selection!["title"] ?? "none"
+        aiChatModel.prepare(chat_title: chat_title/*chat_selection: chat_selection*/)
     }
     
     private func delayIconChange() {
@@ -162,7 +165,7 @@ struct ChatView: View {
                 }
                 
                 
-                .disabled(chat_selection == nil)
+//                .disabled(chat_selection == nil)
                 .onAppear(){
                     scrollProxy = scrollView
                     scrollToBottom(with_animation: false)
@@ -171,15 +174,15 @@ struct ChatView: View {
             }
             .frame(maxHeight: .infinity)
 //            .disabled(aiChatModel.state == .loading)
-            .onChange(of: chat_selection) { chat_name in
+            .onChange(of: chat_title/*chat_selection*/) { chat_name in
                 Task {
-                    if chat_name == nil{
-                        close_chat()
-                    }
-                    else{
+//                    if chat_name == nil{
+//                        close_chat()
+//                    }
+//                    else{
                         //                    isInputFieldFocused = true
-                        await self.reload()
-                    }
+                        self.reload()
+//                    }
                 }
             }
             .toolbar {
@@ -188,38 +191,38 @@ struct ChatView: View {
                         clearChatAlert = true
                     }
                 } label: {
-                    Image(systemName: "eraser.line.dashed.fill")
+                    Image(systemName: "trash")
                 }
-                .alert("Are you sure?", isPresented: $clearChatAlert, actions: {
+                .alert("Conversation history will be deleted", isPresented: $clearChatAlert, actions: {
                     Button("Cancel", role: .cancel, action: {})
-                    Button("Clear", role: .destructive, action: {
-//                        aiChatModel.messages = []
-//                        save_chat_history(aiChatModel.messages,aiChatModel.chat_name+".json")
+                    Button("Proceed", role: .destructive, action: {
+                        aiChatModel.messages = []
+                        save_chat_history(aiChatModel.messages,aiChatModel.chat_name+".json")
                     })
                 }, message: {
-                    Text("The message history will be cleared")
+//                    Text("The message history will be cleared")
                 })
-                Button {
-                    Task {
-//                        self.aiChatModel.chat = nil
-                        reload_button_icon = "checkmark"
-                        delayIconChange()
-                    }
-                } label: {
-                    Image(systemName: reload_button_icon)
-                }
-//                .disabled(aiChatModel.predicting)
-                //                .font(.title2)
-                Button {
-                    Task {
-                                            //    add_chat_dialog = true
-                        toggleEditChat = true
-                        edit_chat_dialog = true
-                        //                        chat_selection = nil
-                    }
-                } label: {
-                    Image(systemName: "slider.horizontal.3")
-                }
+//                Button {
+//                    Task {
+////                        self.aiChatModel.chat = nil
+//                        reload_button_icon = "checkmark"
+//                        delayIconChange()
+//                    }
+//                } label: {
+//                    Image(systemName: reload_button_icon)
+//                }
+////                .disabled(aiChatModel.predicting)
+//                //                .font(.title2)
+//                Button {
+//                    Task {
+//                                            //    add_chat_dialog = true
+//                        toggleEditChat = true
+//                        edit_chat_dialog = true
+//                        //                        chat_selection = nil
+//                    }
+//                } label: {
+//                    Image(systemName: "slider.horizontal.3")
+//                }
                 //                .font(.title2)
             }
 //            .navigationTitle(aiChatModel.Title)

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2503F0772B98084B000E85DD /* ChatListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2503F0762B98084B000E85DD /* ChatListView.swift */; };
 		253DFFD02B85D43000D3BFD1 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 253DFFCF2B85D43000D3BFD1 /* Accelerate.framework */; };
 		253DFFD22B85D43500D3BFD1 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 253DFFD12B85D43500D3BFD1 /* Metal.framework */; };
 		255521AD2B88880500E04438 /* FileHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255521AC2B88880500E04438 /* FileHelper.swift */; };
@@ -54,6 +55,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2503F0762B98084B000E85DD /* ChatListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListView.swift; sourceTree = "<group>"; };
+		2503F0782B9B36D3000E85DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		253DFFCF2B85D43000D3BFD1 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		253DFFD12B85D43500D3BFD1 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
 		255521AC2B88880500E04438 /* FileHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileHelper.swift; sourceTree = "<group>"; };
@@ -230,6 +233,7 @@
 		E4EB1CA92B84EF5B003DFB9B /* PrivateGPT */ = {
 			isa = PBXGroup;
 			children = (
+				2503F0782B9B36D3000E85DD /* Info.plist */,
 				25D71D5B2B944B9E0027C9D3 /* Whisper */,
 				259BFD2E2B9202D00067A427 /* StableDiffusion */,
 				2575C7DF2B85C81D00E832C3 /* Model */,
@@ -258,6 +262,7 @@
 				E4EB1CBD2B84F251003DFB9B /* Message.swift */,
 				E4EB1CBF2B84F272003DFB9B /* LLMTextInput.swift */,
 				2575C7DD2B85C4C300E832C3 /* AIChatModel.swift */,
+				2503F0762B98084B000E85DD /* ChatListView.swift */,
 			);
 			path = Chats;
 			sourceTree = "<group>";
@@ -375,6 +380,7 @@
 				2575C7E12B85C82B00E832C3 /* LlamaState.swift in Sources */,
 				259BFD562B9203430067A427 /* StableDiffusionXLPipeline.swift in Sources */,
 				2575C7E32B85C92700E832C3 /* LibLlama.swift in Sources */,
+				2503F0772B98084B000E85DD /* ChatListView.swift in Sources */,
 				259BFD522B9203430067A427 /* Encoder.swift in Sources */,
 				259BFD532B9203430067A427 /* Decoder.swift in Sources */,
 				259BFD4F2B9203430067A427 /* SafetyChecker.swift in Sources */,
@@ -524,6 +530,7 @@
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PrivateGPT/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Camera access for selecting images";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Microphone access for voice input";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -557,6 +564,7 @@
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PrivateGPT/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Camera access for selecting images";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Microphone access for voice input";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

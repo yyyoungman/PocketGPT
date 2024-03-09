@@ -44,4 +44,8 @@ actor LlavaContext {
     func clear() {
         llamaforked.llava_free(context, false)
     }
+    
+    deinit {
+        llamaforked.llava_free(context, true)
+    }
 }

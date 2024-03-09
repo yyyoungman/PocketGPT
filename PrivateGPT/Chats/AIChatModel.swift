@@ -26,28 +26,53 @@ final class AIChatModel: ObservableObject {
     }
     
     init() {
-        Task {
-//            load()
-            loadLlava()
-//            loadSD()
+//        Task {
+////            loadLlama()
+//            loadLlava()
+////            loadSD()
+//        }
+    }
+    
+    public func prepare(chat_title:String/*chat_selection: Dictionary<String, String>?*/) {
+//        let new_chat_name = chat_selection!["title"] ?? "none"
+        let new_chat_name = chat_title
+        if new_chat_name != self.chat_name {
+            self.chat_name = new_chat_name
+            self.messages = []
+            Task {
+                self.messages = load_chat_history(self.chat_name+".json")!
+                self.AI_typing = -Int.random(in: 0..<100000)
+                self.llamaState = LlamaState() // release old one, and create new one
+                if self.chat_name == "Chat" {
+                    loadLlava()
+                } else if self.chat_name == "Image Creation" {
+                    loadSD()
+                }
+            }
         }
     }
     
     public func loadSD() {
-        do {
-            let resourceURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("sd_turbo")
-            let configuration = MLModelConfiguration()
-            configuration.computeUnits = .cpuOnly//.cpuAndGPU
-            sdPipeline = try StableDiffusionPipeline(resourcesAt: resourceURL,
-                                                       controlNet: [],
-                                                       configuration: configuration,
-                                                       disableSafety: false,
-                                                       reduceMemory: true)
-            try sdPipeline!.loadResources()
-        } catch let err {
-            print("SD loading Error: \(err.localizedDescription)")
+        Task.detached() { // load on background thread, because it takes ~10 seconds
+            // TODO: add task cancellation. https://stackoverflow.com/a/71876683
+            do {
+                let resourceURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("sd_turbo")
+                let configuration = MLModelConfiguration()
+                configuration.computeUnits = .cpuOnly//.cpuAndGPU
+                let sdPipeline = try StableDiffusionPipeline(resourcesAt: resourceURL,
+                                                         controlNet: [],
+                                                         configuration: configuration,
+                                                         disableSafety: false,
+                                                         reduceMemory: true)
+//                sleep(6)
+                try sdPipeline.loadResources()
+                Task { @MainActor in
+                    self.sdPipeline = sdPipeline // assign to main actor's variable on main thread
+                }
+            } catch let err {
+                print("SD loading Error: \(err.localizedDescription)")
+            }
         }
-        return
     }
     
     public func loadLlava() {
@@ -56,10 +81,11 @@ final class AIChatModel: ObservableObject {
         } catch let err {
             print("llava loading Error: \(err.localizedDescription)")
         }
-        return
+//        self.messages = load_chat_history(self.chat_name+".json")!
+//        self.AI_typing = -Int.random(in: 0..<100000)
     }
         
-    public func load() {
+    public func loadLlama() {
         print("Loading model \(filename)...")
         let fileURL = getFileURL(filename: filename)
         if !FileManager.default.fileExists(atPath: fileURL.path) {
@@ -73,8 +99,8 @@ final class AIChatModel: ObservableObject {
             print("Error: \(err.localizedDescription)")
         }
         
-        self.messages = load_chat_history(self.chat_name+".json")!
-        self.AI_typing = -Int.random(in: 0..<100000)
+//        self.messages = load_chat_history(self.chat_name+".json")!
+//        self.AI_typing = -Int.random(in: 0..<100000)
     }
     /*
      tinyllama openorca q4
@@ -84,7 +110,7 @@ final class AIChatModel: ObservableObject {
      <|system|>\nYou are a helpful chatbot that answers questions.</s>\n<|user|>\nWhat is the largest animal on earth?</s>\n<|assistant|>
      */
     
-    private func getConversationPrompt(messages: [Message]) -> String
+    private func getConversationPromptLlama(messages: [Message]) -> String
     {
         // generate prompt from the last n messages
         let contextLength = 2
@@ -168,46 +194,53 @@ final class AIChatModel: ObservableObject {
         self.AI_typing += 1  
         
         Task {
-//            let prompt = getConversationPrompt(messages: self.messages)
-            let prompt = getConversationPromptLlava(messages: self.messages)
-//            let prompt = getConversationPromptSD(messages: self.messages)
+            var prompt = ""
+            if self.chat_name == "Chat" {
+//                let prompt = getConversationPromptLlama(messages: self.messages)
+                prompt = getConversationPromptLlava(messages: self.messages)
+            } else if self.chat_name == "Image Creation" {
+                prompt = getConversationPromptSD(messages: self.messages)
+            }
             
             var message = Message(sender: .system, text: "", tok_sec: 0)
             self.messages.append(message)
             let messageIndex = self.messages.endIndex - 1
             
             
-            // 1. llama
-//            await llamaState.complete(
-//                text: prompt,
-//                { str in
-//                    message.state = .predicting
-//                    message.text += str
-//                    
-//                    var updatedMessages = self.messages
-//                    updatedMessages[messageIndex] = message
-//                    self.messages = updatedMessages
-//                    self.AI_typing += 1
-//                }
-//            )
-//            save_chat_history(self.messages, self.chat_name+".json")
+            if self.chat_name == "Chat" {
+                // 1. llama
+    //            await llamaState.complete(
+    //                text: prompt,
+    //                { str in
+    //                    message.state = .predicting
+    //                    message.text += str
+    //
+    //                    var updatedMessages = self.messages
+    //                    updatedMessages[messageIndex] = message
+    //                    self.messages = updatedMessages
+    //                    self.AI_typing += 1
+    //                }
+    //            )
+                
+                // 2. llava
+                await llamaState.completeLlava(
+                    text: prompt,
+                    { str in
+                        message.state = .predicting
+                        message.text += str
+                        
+                        var updatedMessages = self.messages
+                        updatedMessages[messageIndex] = message
+                        self.messages = updatedMessages
+                        self.AI_typing += 1
+                    }
+                )
+            } else if self.chat_name == "Image Creation" {
+                message.image = await sdGen(prompt: prompt)
+            }
             
-            // 2. llava
-            await llamaState.completeLlava(
-                text: prompt,
-                { str in
-                    message.state = .predicting
-                    message.text += str
-                    
-                    var updatedMessages = self.messages
-                    updatedMessages[messageIndex] = message
-                    self.messages = updatedMessages
-                    self.AI_typing += 1
-                }
-            )
             
-            // 3. sd
-//            message.image = await sdGen(prompt: prompt)
+            save_chat_history(self.messages, self.chat_name+".json")
 
             message.state = .predicted(totalSecond:0)
             self.messages[messageIndex] = message
