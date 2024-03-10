@@ -40,7 +40,7 @@ final class AIChatModel: ObservableObject {
             self.chat_name = new_chat_name
             self.messages = []
             Task {
-                self.messages = load_chat_history(self.chat_name+".json")!
+                self.messages = load_chat_history(self.chat_name)!
                 self.AI_typing = -Int.random(in: 0..<100000)
                 self.llamaState = LlamaState() // release old one, and create new one
                 if self.chat_name == "Chat" {
@@ -240,7 +240,12 @@ final class AIChatModel: ObservableObject {
             }
             
             
-            save_chat_history(self.messages, self.chat_name+".json")
+            // save_chat_history(self.messages, self.chat_name)
+//            let answerMessage = message
+//            Task.detached() {
+//                await save_chat_history([requestMessage, answerMessage], self.chat_name)
+//            }
+            save_chat_history([requestMessage, message], self.chat_name)
 
             message.state = .predicted(totalSecond:0)
             self.messages[messageIndex] = message

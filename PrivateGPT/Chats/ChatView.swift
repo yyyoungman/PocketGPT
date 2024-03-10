@@ -197,7 +197,9 @@ struct ChatView: View {
                     Button("Cancel", role: .cancel, action: {})
                     Button("Proceed", role: .destructive, action: {
                         aiChatModel.messages = []
-                        save_chat_history(aiChatModel.messages,aiChatModel.chat_name+".json")
+                        // save_chat_history(aiChatModel.messages,aiChatModel.chat_name)
+//                        clear_chat_history(aiChatModel.messages, aiChatModel.chat_name)
+                        clear_chat_history(aiChatModel.chat_name)
                     })
                 }, message: {
 //                    Text("The message history will be cleared")

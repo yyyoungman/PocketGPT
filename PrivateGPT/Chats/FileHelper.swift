@@ -9,6 +9,64 @@ import Foundation
 import SwiftUI
 import UniformTypeIdentifiers
 
+// image to uiimage
+extension View {
+// This function changes our View to UIView, then calls another function
+// to convert the newly-made UIView to a UIImage.
+    public func asUIImage() -> UIImage {
+        let controller = UIHostingController(rootView: self)
+        
+ // Set the background to be transparent incase the image is a PNG, WebP or (Static) GIF
+        controller.view.backgroundColor = .clear 
+        
+        controller.view.frame = CGRect(x: 0, y: CGFloat(Int.max), width: 1, height: 1)
+        UIApplication.shared.windows.first!.rootViewController?.view.addSubview(controller.view)
+        
+        var size = controller.sizeThatFits(in: UIScreen.main.bounds.size)
+        controller.view.bounds = CGRect(origin: .zero, size: size)
+        controller.view.sizeToFit()
+        
+// here is the call to the function that converts UIView to UIImage: `.asUIImage()`
+        let image = controller.view.asUIImage()
+        controller.view.removeFromSuperview()
+        return image
+    }
+}
+
+extension UIView {
+// This is the function to convert UIView to UIImage
+    public func asUIImage() -> UIImage {
+        let renderer = UIGraphicsImageRenderer(bounds: bounds)
+        return renderer.image { rendererContext in
+            layer.render(in: rendererContext.cgContext)
+        }
+    }
+}
+
+extension UIImage {
+    public func resized(toMax: CGFloat) -> UIImage {
+        let maxDimension = max(size.width, size.height)
+        if maxDimension <= toMax {
+            return self
+        }
+        var newSize = size
+        // keep aspect ratio
+        if size.width > toMax || size.height > toMax {
+            let ratio = size.width / size.height
+            if size.width > size.height {
+                newSize.width = toMax
+                newSize.height = newSize.width / ratio
+            } else {
+                newSize.height = toMax
+                newSize.width = newSize.height * ratio
+            }
+        }
+        return UIGraphicsImageRenderer(size: newSize).image { _ in
+            self.draw(in: CGRect(origin: .zero, size: newSize))
+        }
+    }
+}
+
 
 //func parse_model_setting_template(template_path:String) -> ChatSettingsTemplate{
 //    var tmp_template:ChatSettingsTemplate = ChatSettingsTemplate()
@@ -574,7 +632,7 @@ func load_chat_history(_ fname:String) -> [Message]?{
         let documentsPath = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first
         let destinationURL = documentsPath!.appendingPathComponent("history")
         try fileManager.createDirectory (at: destinationURL, withIntermediateDirectories: true, attributes: nil)
-        let path = destinationURL.appendingPathComponent(fname).path
+        let path = destinationURL.appendingPathComponent(fname + ".json").path
         let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
         let jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
         let jsonResult_dict = jsonResult as? [Dictionary<String, String>]
@@ -607,6 +665,14 @@ func load_chat_history(_ fname:String) -> [Message]?{
             }
             if (row["tok_sec"] != nil){
                 tmp_msg.tok_sec = Double(row["tok_sec"]!) ?? 0
+            }
+            if (row["image"] != nil){
+                let image_path = destinationURL.appendingPathComponent("images").appendingPathComponent(fname).appendingPathComponent(row["image"]!)
+                let uiimage = UIImage(contentsOfFile: image_path.path)
+                if uiimage != nil {
+                    let image = Image(uiImage: uiimage!)
+                    tmp_msg.image = image
+                }
             }
             res.append(tmp_msg)
         }
@@ -685,10 +751,18 @@ func copyModelToSandbox (url: URL, dest:String = "models") -> String?{
     }
 }
 
+// append to existing file
 func save_chat_history(_ messages_raw: [Message],_ fname:String){
     do {
         let fileManager = FileManager.default
-        var messages: [Dictionary<String, AnyObject>] = []
+        let documentsPath = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first
+        let destinationURL = documentsPath!.appendingPathComponent("history")
+        try fileManager.createDirectory (at: destinationURL, withIntermediateDirectories: true, attributes: nil)
+
+        let imageDirURL = destinationURL.appendingPathComponent("images").appendingPathComponent(fname)
+        try fileManager.createDirectory (at: imageDirURL, withIntermediateDirectories: true, attributes: nil)
+
+        var messages_new: [Dictionary<String, AnyObject>] = []
         for message in messages_raw {
             var tmp_msg = ["id":message.id.uuidString as AnyObject,
                            "sender":String(describing: message.sender) as AnyObject,
@@ -698,14 +772,45 @@ func save_chat_history(_ messages_raw: [Message],_ fname:String){
             if (message.header != ""){
                 tmp_msg["header"] = message.header as AnyObject
             }
-            messages.append(tmp_msg)
+
+            // if message.image exists, save it to disk and add image file name to tmp_msg
+            if message.image != nil {
+                let path = imageDirURL.appendingPathComponent(message.id.uuidString+".jpg")
+                if !fileManager.fileExists(atPath: path.path){
+                    let uiImage = message.image!.asUIImage()
+                    let uiImageResized = uiImage.resized(toMax: 1024)
+                    Task.detached() { // time consuming operation
+                        let data = uiImageResized.jpegData(compressionQuality: 0.1)
+                         try data!.write(to: path)
+                    }
+                }
+                tmp_msg["image"] = message.id.uuidString+".jpg" as AnyObject
+            }
+
+            messages_new.append(tmp_msg)
         }
-        let jsonData = try JSONSerialization.data(withJSONObject: messages, options: .prettyPrinted)
-        let documentsPath = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first
-        let destinationURL = documentsPath!.appendingPathComponent("history")
-        try fileManager.createDirectory (at: destinationURL, withIntermediateDirectories: true, attributes: nil)
-        let path = destinationURL.appendingPathComponent(fname)
-        try jsonData.write(to: path)
+        
+        // let jsonData = try JSONSerialization.data(withJSONObject: messages, options: .prettyPrinted)
+        // let path = destinationURL.appendingPathComponent(fname)
+        // try jsonData.write(to: path)
+
+        let messages_new_let = messages_new
+        Task.detached() { // time consuming operation
+            let fileManager = FileManager.default
+            let jsonPath = destinationURL.appendingPathComponent(fname + ".json")
+            var messages_total: [Dictionary<String, AnyObject>] = []
+            // append messages to the existing file. If the file does not exist, create a new file.
+            if fileManager.fileExists(atPath: jsonPath.path){
+                let data = try Data(contentsOf: jsonPath, options: .mappedIfSafe)
+                let jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
+                messages_total = jsonResult as! [Dictionary<String, AnyObject>]
+                messages_total.append(contentsOf: messages_new_let)
+            } else {
+                messages_total = messages_new_let
+            }
+            let jsonData = try JSONSerialization.data(withJSONObject: messages_total, options: .prettyPrinted)
+            try jsonData.write(to: jsonPath)
+        }
         
     }
     catch {
@@ -732,6 +837,26 @@ func clear_chat_history(_ messages_raw: [Message],_ fname:String){
         let path = destinationURL.appendingPathComponent(fname)
         try jsonData.write(to: path)
         
+    }
+    catch {
+        // handle error
+    }
+}
+
+// delete json file and image folder
+func clear_chat_history(_ fname:String){
+    do {
+        let fileManager = FileManager.default
+        let documentsPath = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first
+        let destinationURL = documentsPath!.appendingPathComponent("history")
+        let jsonPath = destinationURL.appendingPathComponent(fname + ".json")
+        let imageDirURL = destinationURL.appendingPathComponent("images").appendingPathComponent(fname)
+        if fileManager.fileExists(atPath: jsonPath.path){
+            try fileManager.removeItem(at: jsonPath)
+        }
+        if fileManager.fileExists(atPath: imageDirURL.path){
+            try fileManager.removeItem(at: imageDirURL)
+        }
     }
     catch {
         // handle error
