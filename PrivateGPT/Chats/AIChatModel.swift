@@ -136,8 +136,28 @@ final class AIChatModel: ObservableObject {
     
     private func getConversationPromptLlava(messages: [Message]) -> String
     {
+//        let message = messages[messages.count-1]
+//        return message.text
+        
+        // generate prompt from the last n messages
+        let contextLength = 2 // # rounds
+        let numChats = contextLength * 2 + 1
+        var prompt = "A chat between a curious human and an artificial intelligence assistant. The assistant gives helpful, detailed, and polite answers to the human's questions.\n"
+        let start = max(0, messages.count - numChats)
+        for i in start..<messages.count-1 {
+            let message = messages[i]
+            if message.sender == .user {
+                prompt += "USER: " + message.text + "\n"
+            } else if message.sender == .system {
+                prompt += "ASSISTANT: " + message.text + "\n"
+            }
+        }
         let message = messages[messages.count-1]
-        return message.text
+        if message.sender == .user {
+            prompt += "USER: <image> " + message.text + "\n"
+        }
+        prompt += "ASSISTANT: "
+        return prompt
     }
     
     private func getConversationPromptSD(messages: [Message]) -> String

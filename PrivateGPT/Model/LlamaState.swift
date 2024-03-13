@@ -124,8 +124,10 @@ class LlamaState: ObservableObject {
         
     func loadModelLlava() throws {
         llavaContext = try LlavaContext.create_context(
-            model_path: getDocumentsDirectory().appendingPathComponent("llm").appendingPathComponent("MobileVLM-1.7B-ggml-model-q4_k.gguf").path(),
-            mmproj_path: getDocumentsDirectory().appendingPathComponent("llm").appendingPathComponent("MobileVLM-1.7B-mmproj-model-f16.gguf").path()
+//            model_path: getDocumentsDirectory().appendingPathComponent("llm").appendingPathComponent("MobileVLM-1.7B-ggml-model-q4_k.gguf").path(),
+//            mmproj_path: getDocumentsDirectory().appendingPathComponent("llm").appendingPathComponent("MobileVLM-1.7B-mmproj-model-f16.gguf").path()
+            model_path: getDocumentsDirectory().appendingPathComponent("llm").appendingPathComponent("MobileVLM_V2-3B-ggml-model-q4_k.gguf").path(),
+            mmproj_path: getDocumentsDirectory().appendingPathComponent("llm").appendingPathComponent("MobileVLM_V2-3B-mmproj-model-f16.gguf").path()
         )
     }
     
@@ -186,7 +188,7 @@ class LlamaState: ObservableObject {
         await llavaContext.completion_init(text: text)
 
         var count = 0
-        while count < 128 {
+        while count < 256 {
             let result = await llavaContext.completion_loop(prompt: text)
             if result == "" || result == "</s>" {
                 break
