@@ -12,7 +12,7 @@ struct MessageView: View {
 
     private struct SenderView: View {
         var sender: Message.Sender
-        var current_model = "LLM"
+        var current_model = "PrivateGPT"
         
         var body: some View {
             switch sender {
@@ -67,12 +67,43 @@ struct MessageView: View {
                         .scaledToFit()
                         .frame(maxHeight: 200)
                     Text(message.text).textSelection(.enabled)
-                    Text(String(format: "%.2f ses, %.2f t/s", totalSecond,message.tok_sec))
-                        .font(.footnote)
-                        .foregroundColor(Color.gray)
+//                    Text(String(format: "%.2f ses, %.2f t/s", totalSecond,message.tok_sec))
+//                        .font(.footnote)
+//                        .foregroundColor(Color.gray)
                 }.textSelection(.enabled)
             }
         }
+    }
+    
+    private var ImageOperationView: some View {
+//        var message: Message
+//        var body: some View {
+            VStack {
+                Spacer()
+                
+                Button(
+                    action: {
+                        downloadImage()
+                    },
+                    label: {
+                        Image(systemName: "arrow.down.circle")
+                    }
+                )
+                .buttonStyle(.borderless)
+//                Button(
+//                    action: {
+//                        regenerateImage()
+//                    },
+//                    label: {
+//                        Image(systemName: "gobackward")
+//                    }
+//                )
+//                .buttonStyle(.borderless)
+//                .offset(x: 0, y: 10)
+
+                Spacer()
+            }
+//        }
     }
 
     var body: some View {
@@ -88,10 +119,26 @@ struct MessageView: View {
                     .background(Color.secondary.opacity(0.2))
                     .cornerRadius(12.0)
             }
+            
+            if message.sender == .system  && message.image != nil {
+                ImageOperationView
+            }
 
             if message.sender == .system {
                 Spacer()
             }
+        }
+    }
+    
+    private func downloadImage() {
+        DispatchQueue.main.async {
+            let uiImage = message.image!.asUIImage()
+            UIImageWriteToSavedPhotosAlbum(uiImage, nil, nil, nil)
+        }
+    }
+    
+    private func regenerateImage() {
+        Task {
         }
     }
 }

@@ -12,8 +12,8 @@ struct ChatView: View {
     @EnvironmentObject var aiChatModel: AIChatModel
 //    @EnvironmentObject var orientationInfo: OrientationInfo
     
-    @State var placeholderString: String = "Type your message..."
-    @State private var inputText: String = "Type your message..."
+    @State var placeholderString: String = "Message"
+//    @State private var inputText: String = "Type your message..."
     
     enum FocusedField {
         case firstName, lastName
@@ -88,6 +88,11 @@ struct ChatView: View {
 //        aiChatModel.messages = load_chat_history(chat_selection!["chat"]!+".json")!
 //        aiChatModel.AI_typing = -Int.random(in: 0..<100000)
 //        aiChatModel.chat_name = chat_selection!["title"] ?? "none"
+        if chat_title == "Chat" {
+            placeholderString = "Message"
+        } else if chat_title == "Image Creation" {
+            placeholderString = "Describe the image"
+        }
         aiChatModel.prepare(chat_title: chat_title/*chat_selection: chat_selection*/)
     }
     
@@ -158,7 +163,7 @@ struct ChatView: View {
                         Text("").id("latest")
                     }
                     .listStyle(PlainListStyle())
-                    .overlay(starOverlay, alignment: .bottomTrailing)
+//                    .overlay(starOverlay, alignment: .bottomTrailing)
                 }
                 .onChange(of: aiChatModel.AI_typing){ ai_typing in
                     scrollToBottom(with_animation: false)

@@ -29,6 +29,12 @@ extension View {
     }
 }
 
+extension View {
+    func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+}
+
 public struct LLMTextInput: View {
 
     private let messagePlaceholder: String
@@ -145,6 +151,7 @@ public struct LLMTextInput: View {
         Button(
             action: {
                 sendMessageButtonPressed()
+                hideKeyboard()
             },
             label: {
                 Label("", systemImage: "paperplane")
@@ -159,7 +166,7 @@ public struct LLMTextInput: View {
             }
         )
         .buttonStyle(.borderless)
-            .offset(x: 5, y: -10)
+            .offset(x: 15, y: -10)
     }
     
     /// - Parameters:

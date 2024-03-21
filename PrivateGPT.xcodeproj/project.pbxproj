@@ -45,6 +45,9 @@
 		25D71D612B944C570027C9D3 /* WhisperState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D71D5F2B944C570027C9D3 /* WhisperState.swift */; };
 		25D71D642B944C5F0027C9D3 /* RiffWaveUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D71D622B944C5F0027C9D3 /* RiffWaveUtils.swift */; };
 		25D71D652B944C5F0027C9D3 /* Recorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D71D632B944C5F0027C9D3 /* Recorder.swift */; };
+		25F408B22BA586F2002B73D5 /* whisper in Resources */ = {isa = PBXBuildFile; fileRef = 25F408B12BA586F2002B73D5 /* whisper */; };
+		25F408B42BA58AAB002B73D5 /* llm in Resources */ = {isa = PBXBuildFile; fileRef = 25F408B32BA58AAB002B73D5 /* llm */; };
+		25F408B62BA58C31002B73D5 /* sd_turbo in Resources */ = {isa = PBXBuildFile; fileRef = 25F408B52BA58C31002B73D5 /* sd_turbo */; };
 		E4EB1CAB2B84EF5B003DFB9B /* PrivateGPTApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EB1CAA2B84EF5B003DFB9B /* PrivateGPTApp.swift */; };
 		E4EB1CAF2B84EF60003DFB9B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E4EB1CAE2B84EF60003DFB9B /* Assets.xcassets */; };
 		E4EB1CB22B84EF60003DFB9B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E4EB1CB12B84EF60003DFB9B /* Preview Assets.xcassets */; };
@@ -94,6 +97,10 @@
 		25D71D5F2B944C570027C9D3 /* WhisperState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhisperState.swift; sourceTree = "<group>"; };
 		25D71D622B944C5F0027C9D3 /* RiffWaveUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RiffWaveUtils.swift; sourceTree = "<group>"; };
 		25D71D632B944C5F0027C9D3 /* Recorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recorder.swift; sourceTree = "<group>"; };
+		25F408AA2BA5611A002B73D5 /* PrivateGPT.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PrivateGPT.entitlements; sourceTree = "<group>"; };
+		25F408B12BA586F2002B73D5 /* whisper */ = {isa = PBXFileReference; lastKnownFileType = folder; path = whisper; sourceTree = "<group>"; };
+		25F408B32BA58AAB002B73D5 /* llm */ = {isa = PBXFileReference; lastKnownFileType = folder; path = llm; sourceTree = "<group>"; };
+		25F408B52BA58C31002B73D5 /* sd_turbo */ = {isa = PBXFileReference; lastKnownFileType = folder; path = sd_turbo; sourceTree = "<group>"; };
 		E4EB1CA72B84EF5B003DFB9B /* PrivateGPT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PrivateGPT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4EB1CAA2B84EF5B003DFB9B /* PrivateGPTApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateGPTApp.swift; sourceTree = "<group>"; };
 		E4EB1CAE2B84EF60003DFB9B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -212,6 +219,16 @@
 			path = ModelWrapper;
 			sourceTree = "<group>";
 		};
+		25F408B02BA586D5002B73D5 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				25F408B52BA58C31002B73D5 /* sd_turbo */,
+				25F408B32BA58AAB002B73D5 /* llm */,
+				25F408B12BA586F2002B73D5 /* whisper */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		E4EB1C9E2B84EF5B003DFB9B = {
 			isa = PBXGroup;
 			children = (
@@ -233,6 +250,8 @@
 		E4EB1CA92B84EF5B003DFB9B /* PrivateGPT */ = {
 			isa = PBXGroup;
 			children = (
+				25F408B02BA586D5002B73D5 /* Resources */,
+				25F408AA2BA5611A002B73D5 /* PrivateGPT.entitlements */,
 				2503F0782B9B36D3000E85DD /* Info.plist */,
 				25D71D5B2B944B9E0027C9D3 /* Whisper */,
 				259BFD2E2B9202D00067A427 /* StableDiffusion */,
@@ -332,6 +351,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				25F408B42BA58AAB002B73D5 /* llm in Resources */,
+				25F408B62BA58C31002B73D5 /* sd_turbo in Resources */,
+				25F408B22BA586F2002B73D5 /* whisper in Resources */,
 				E4EB1CB22B84EF60003DFB9B /* Preview Assets.xcassets in Resources */,
 				E4EB1CAF2B84EF60003DFB9B /* Assets.xcassets in Resources */,
 			);
@@ -435,6 +457,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				EXCLUDED_ARCHS = "";
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -499,6 +522,7 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				EXCLUDED_ARCHS = "";
 				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -523,6 +547,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = PrivateGPT/PrivateGPT.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"PrivateGPT/Preview Content\"";
@@ -531,13 +556,17 @@
 				FRAMEWORK_SEARCH_PATHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PrivateGPT/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = PocketGPT;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Camera access for selecting images";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Microphone access for voice input";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Save photo to library";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = "iphone-ipad-minimum-performance-a12";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -557,6 +586,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = PrivateGPT/PrivateGPT.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"PrivateGPT/Preview Content\"";
@@ -565,13 +595,17 @@
 				FRAMEWORK_SEARCH_PATHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PrivateGPT/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = PocketGPT;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Camera access for selecting images";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Microphone access for voice input";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Save photo to library";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = "iphone-ipad-minimum-performance-a12";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

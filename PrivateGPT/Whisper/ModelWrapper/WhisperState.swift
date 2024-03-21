@@ -15,8 +15,8 @@ class WhisperState: NSObject, ObservableObject, AVAudioRecorderDelegate {
     private var audioPlayer: AVAudioPlayer?
     
     private var modelUrl: URL? {
-//        Bundle.main.url(forResource: "ggml-base.en-q5_0", withExtension: "bin", subdirectory: "models")
-        FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("whisper").appendingPathComponent("ggml-base.en-q5_0.bin")
+//        FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("whisper").appendingPathComponent("ggml-base.en-q5_0.bin")
+        Bundle.main.url(forResource: "ggml-base.en-q5_0", withExtension: "bin", subdirectory: "whisper")
     }
     
     private var sampleUrl: URL? {
@@ -104,7 +104,8 @@ class WhisperState: NSObject, ObservableObject, AVAudioRecorderDelegate {
                     Task {
                         do {
                             self.stopPlayback()
-                            let file = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+//                            let file = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+                            let file = FileManager.default.temporaryDirectory
                                 .appending(path: "output.wav")
                             try await self.recorder.startRecording(toOutputFile: file, delegate: self)
                             self.isRecording = true

@@ -126,8 +126,10 @@ class LlamaState: ObservableObject {
         llavaContext = try LlavaContext.create_context(
 //            model_path: getDocumentsDirectory().appendingPathComponent("llm").appendingPathComponent("MobileVLM-1.7B-ggml-model-q4_k.gguf").path(),
 //            mmproj_path: getDocumentsDirectory().appendingPathComponent("llm").appendingPathComponent("MobileVLM-1.7B-mmproj-model-f16.gguf").path()
-            model_path: getDocumentsDirectory().appendingPathComponent("llm").appendingPathComponent("MobileVLM_V2-3B-ggml-model-q4_k.gguf").path(),
-            mmproj_path: getDocumentsDirectory().appendingPathComponent("llm").appendingPathComponent("MobileVLM_V2-3B-mmproj-model-f16.gguf").path()
+//            model_path: getDocumentsDirectory().appendingPathComponent("llm").appendingPathComponent("MobileVLM_V2-3B-ggml-model-q4_k.gguf").path(),
+//            mmproj_path: getDocumentsDirectory().appendingPathComponent("llm").appendingPathComponent("MobileVLM_V2-3B-mmproj-model-f16.gguf").path()
+            model_path: Bundle.main.url(forResource: "MobileVLM_V2-3B-ggml-model-q4_k", withExtension: "gguf", subdirectory: "llm")!.path(),
+            mmproj_path: Bundle.main.url(forResource: "MobileVLM_V2-3B-mmproj-model-f16", withExtension: "gguf", subdirectory: "llm")!.path()
         )
     }
     

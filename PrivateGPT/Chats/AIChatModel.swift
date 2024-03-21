@@ -42,7 +42,14 @@ final class AIChatModel: ObservableObject {
             Task {
                 self.messages = load_chat_history(self.chat_name)!
                 self.AI_typing = -Int.random(in: 0..<100000)
+                
                 self.llamaState = LlamaState() // release old one, and create new one
+                if self.sdPipeline != nil {
+                    Task.detached() {
+                        await self.sdPipeline?.unloadResources()
+                    }
+                }
+                
                 if self.chat_name == "Chat" {
                     loadLlava()
                 } else if self.chat_name == "Image Creation" {
@@ -56,9 +63,13 @@ final class AIChatModel: ObservableObject {
         Task.detached() { // load on background thread, because it takes ~10 seconds
             // TODO: add task cancellation. https://stackoverflow.com/a/71876683
             do {
-                let resourceURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("sd_turbo")
+//                let resourceURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("sd_turbo")
+                // let resourceURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("sd_turbo_8bit")
+                // get main bundle's "sd_turbo" folder url
+                let resourceURL = Bundle.main.url(forResource: "sd_turbo", withExtension: nil)!
                 let configuration = MLModelConfiguration()
-                configuration.computeUnits = .cpuOnly//.cpuAndGPU
+//                configuration.computeUnits = .cpuOnly
+                configuration.computeUnits = .cpuAndGPU
                 let sdPipeline = try StableDiffusionPipeline(resourcesAt: resourceURL,
                                                          controlNet: [],
                                                          configuration: configuration,
@@ -66,6 +77,7 @@ final class AIChatModel: ObservableObject {
                                                          reduceMemory: true)
 //                sleep(6)
                 try sdPipeline.loadResources()
+                print("sdPipeline loaded")
                 Task { @MainActor in
                     self.sdPipeline = sdPipeline // assign to main actor's variable on main thread
                 }
@@ -176,7 +188,7 @@ final class AIChatModel: ObservableObject {
         var config = StableDiffusionPipeline.Configuration(prompt: prompt)
 //        config.negativePrompt = negativePrompt
         config.stepCount = 2
-//        config.seed = theSeed
+        config.seed = UInt32.random(in: 1...UInt32.max)
 //        config.guidanceScale = guidanceScale
         // config.guidanceScale = 0.1
 //        config.disableSafety = disableSafety
@@ -186,15 +198,12 @@ final class AIChatModel: ObservableObject {
         
         var ret: Image? = nil
         do {
+            // wait for the pipeline to be loaded
+            while sdPipeline == nil {
+                try await Task.sleep(nanoseconds: 1_000_000_000) // 1 second
+                print("waiting for sd pipeline to finish loading")
+            }
             let images = try sdPipeline!.generateImages(configuration: config) { progress in
-    //            sampleTimer.stop()
-    //            handleProgress(StableDiffusionProgress(progress: progress,
-    //                                                   previewIndices: previewIndices),
-    //                           sampleTimer: sampleTimer)
-    //            if progress.stepCount != progress.step {
-    //                sampleTimer.start()
-    //            }
-    //            return !canceled
                 return true
             }
             let image = images.compactMap({ $0 }).first
@@ -256,7 +265,25 @@ final class AIChatModel: ObservableObject {
                     }
                 )
             } else if self.chat_name == "Image Creation" {
-                message.image = await sdGen(prompt: prompt)
+                let pr = prompt
+//                Task.detached() {
+//                    print("start sleeping 10")
+//                    sleep(10)
+//                    print("end sleeping 10")
+                self.AI_typing += 1
+                try await Task.sleep(nanoseconds: 1_000_000_00) // wait 0.1 second for UI to update
+                    let image = await self.sdGen(prompt: pr)
+                message.image = image
+                self.AI_typing += 1
+//                    DispatchQueue.main.async {
+//                        var updatedMessages = self.messages
+//                        let messageIndex = self.messages.endIndex - 1
+//                        var m = updatedMessages[messageIndex]
+//                        m.image = image
+//                        updatedMessages[messageIndex] = m
+//                        self.messages = updatedMessages
+//                    }
+//                }
             }
             
             

@@ -181,7 +181,7 @@ extension MultilingualTextEncoder {
 public enum Script: String {
     case latin, cyrillic, cjk
 
-#if canImport(NaturalLanguage.NLScript)
+//#if canImport(NaturalLanguage.NLScript)
     @available(iOS 17.0, macOS 14.0, *)
     var asNLScript: NLScript {
         switch self {
@@ -190,5 +190,5 @@ public enum Script: String {
         case .cjk: return .simplifiedChinese
         }
     }
-#endif
+//#endif
 }
