@@ -172,6 +172,14 @@ final class AIChatModel: ObservableObject {
         return prompt
     }
     
+//    private func getConversationPromptLlava(text: String) -> String
+//    {
+//        var prompt = "A chat between a curious human and an artificial intelligence assistant. The assistant gives helpful, detailed, and polite answers to the human's questions.\n"
+//        prompt += "USER: " + text + "\n"
+//        prompt += "ASSISTANT: "
+//        return prompt
+//    }
+    
     private func getConversationPromptSD(messages: [Message]) -> String
     {
         let message = messages[messages.count-1]
@@ -299,5 +307,54 @@ final class AIChatModel: ObservableObject {
             llamaState.answer = ""
             self.AI_typing = 0
         }
+    }
+
+//    public func getSingleAnswer(message in_text: String, _ tokenCallback: ((String)  -> ())?) async {
+//        var prompt = ""
+//        prompt = getConversationPromptLlava(text: in_text)
+//
+//        print("getAnswer: \(in_text)")
+//        await llamaState.completeLlavaSentence(
+//            text: prompt,
+//            tokenCallback
+//        )
+//    }
+
+    public func getVoiceAnswer(text_in: String, messages: [Message], _ tokenCallback: ((String)  -> ())?) async -> [Message] {
+        print("getVoiceAnswer: \(text_in)")
+        var messages_in = messages
+        let requestMessage = Message(sender: .user, state: .typed, text: text_in, tok_sec: 0, image: nil)
+        messages_in.append(requestMessage)
+        
+        var prompt = ""
+        prompt = getConversationPromptLlava(messages: messages_in)
+//        print("[prompt into llm]", prompt)
+        
+        var message = Message(sender: .system, text: "", tok_sec: 0)
+        messages_in.append(message)
+        let messageIndex = messages_in.endIndex - 1
+ 
+        await llamaState.completeLlavaSentence(
+            text: prompt,
+            { str in
+                message.state = .predicting
+                message.text += str
+                
+                var updatedMessages = messages_in
+                updatedMessages[messageIndex] = message
+                messages_in = updatedMessages
+
+                tokenCallback?(str)
+            }
+        )
+        
+        message.state = .predicted(totalSecond:0)
+        messages_in[messageIndex] = message
+        llamaState.answer = ""
+        return messages_in
+    }
+
+    public func stopPredicting() {
+        llamaState.stopPredicting()
     }
 }

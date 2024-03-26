@@ -22,6 +22,7 @@ class LlamaState: ObservableObject {
     @Published var cacheCleared = false
     @Published var downloadedModels: [Model] = []
     @Published var undownloadedModels: [Model] = []
+    @Published var interrupt: Bool = false
     let NS_PER_S = 1_000_000_000.0
 
     private var llamaContext: LlamaContext?
@@ -187,11 +188,14 @@ class LlamaState: ObservableObject {
         guard let llavaContext else {
             return
         }
+        print("completion_init")
         await llavaContext.completion_init(text: text)
+        print("completion_init done")
 
         var count = 0
         while count < 256 {
             let result = await llavaContext.completion_loop(prompt: text)
+//            print("completion_loop: ", result)
             if result == "" || result == "</s>" {
                 break
             }
@@ -202,6 +206,45 @@ class LlamaState: ObservableObject {
         }
 
         await llavaContext.clear()
+    }
+
+    func completeLlavaSentence(text: String, _ tokenCallback: ((String)  -> ())?) async {
+        guard let llavaContext else {
+            return
+        }
+        await llavaContext.completion_init(text: text)
+
+        var count = 0
+        var sentence = ""
+        while count < 256 {
+            if interrupt {
+                interrupt = false
+                break
+            }
+            let result = await llavaContext.completion_loop(prompt: text)
+            if result == "" || result == "</s>" {
+                break
+            }
+            sentence += result
+
+            // Output every sentence
+            if result == "." || result == "?" || result == "!" {
+                let sentenceOut = sentence
+                DispatchQueue.main.async {
+                    tokenCallback?(sentenceOut)
+                }
+                sentence = ""
+            }
+            count += 1
+        }
+
+        await llavaContext.clear()
+        print("completeLlavaSentence done")
+    }
+
+    func stopPredicting() {
+        print("llamaState stopPredicting")
+        interrupt = true
     }
 
     func bench() async {

@@ -69,6 +69,19 @@ actor WhisperContext {
             throw WhisperError.couldNotInitializeContext
         }
     }
+
+    static func vad(samples: [Float]) -> Bool {
+        // call public func vad_simple_c(_ data: UnsafeMutablePointer<Float>!, _ length: Int32, _ sample_rate: Int32, _ last_ms: Int32, _ vad_thold: Float, _ freq_thold: Float, _ verbose: Int32) -> Int32
+
+        var samples = samples
+        let sampleRate = 16000
+        let lastMs = 1250
+        let vadThold: Float = 0.6
+        let freqThold: Float = 100
+        let verbose = false
+        let silence = vad_simple_c(&samples, Int32(samples.count), Int32(sampleRate), Int32(lastMs), vadThold, freqThold, verbose ? 1 : 0)
+        return silence == 1
+    }
 }
 
 fileprivate func cpuCount() -> Int {

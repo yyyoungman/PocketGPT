@@ -129,6 +129,68 @@ class WhisperState: NSObject, ObservableObject, AVAudioRecorderDelegate {
             }
         }
     }
+
+    public func getSentence() async -> String {
+        // Task {
+            messageLog = ""
+            
+            // requestRecordPermission { granted in
+            //     if granted {
+
+                    // Load model while user is speaking
+                    Task {
+                        do {
+                            try self.loadModel()
+                        } catch {
+                            print(error.localizedDescription)
+                        }
+                    }
+                    
+                    // Task {
+                        do {
+                            self.stopPlayback()
+//                            let file = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+                            let file = FileManager.default.temporaryDirectory
+                                .appending(path: "output.wav")
+                            try await self.recorder.startRecording(toOutputFile: file, delegate: self)
+                            self.isRecording = true
+                            self.recordedFile = file
+
+                            // on a background thread
+                            // Task {
+                                // every 0.1 seconds, check if the user is still speaking
+                                while await self.isRecording {
+                                    try await Task.sleep(nanoseconds: 100_000_000)
+                                    // read the past 2 second's audio samples from the file
+                                    let samples = try decodeWaveFile(file, forLastSeconds: 2)
+//                                    print("samples count", samples.count)
+                                    // call vad
+                                    let silence = WhisperContext.vad(samples: samples)
+
+                                    // if silence, stop recording and transcribe
+                                    if silence {
+                                        await self.recorder.stopRecording()
+                                        self.isRecording = false
+                                        if let rec = self.recordedFile {
+                                            await self.transcribeAudio(rec)
+                                            return self.messageLog
+                                        }
+//                                        whisperContext = nil // release model every time to free memory (~300MB)
+                                    }
+                                }
+                            // }
+                        } catch {
+                            print(error.localizedDescription)
+//                            self.messageLog += "\(error.localizedDescription)\n"
+                            self.isRecording = false
+                        }
+                    // }
+                    
+                // }
+            // }
+        // }
+        return messageLog
+    }
     
     private func requestRecordPermission(response: @escaping (Bool) -> Void) {
 #if os(macOS)

@@ -49,6 +49,10 @@ public struct LLMTextInput: View {
 //    @State private var isRecording: Bool = false
     @StateObject var whisperState = WhisperState()
     
+    @State private var sendIcon = "headphones"
+    @State private var showVoiceView = false
+    
+    
     
     public var body: some View {
         HStack(alignment: .bottom) {
@@ -90,7 +94,7 @@ public struct LLMTextInput: View {
             
             Group {
                     sendButton
-                        .disabled(input_text.isEmpty/* && !aiChatModel.predicting*/)
+//                        .disabled(input_text.isEmpty/* && !aiChatModel.predicting*/)
             }
                 .frame(minWidth: 33)
         }
@@ -125,6 +129,12 @@ public struct LLMTextInput: View {
                     }
                 }
             }
+//            .sheet(isPresented: $showVoiceView) {
+            .fullScreenCover(isPresented: $showVoiceView) {
+                VoiceView(showModal: self.$showVoiceView) // present full screen modal
+//                        .presentationDetents([.fraction(0.1), .large])
+                .environmentObject(aiChatModel)
+            }
     }
     
     private var voiceButton: some View {
@@ -154,7 +164,7 @@ public struct LLMTextInput: View {
                 hideKeyboard()
             },
             label: {
-                Label("", systemImage: "paperplane")
+                Label("", systemImage: input_text.isEmpty ? "headphones" : "paperplane")
 //                Image(systemName: aiChatModel.action_button_icon)
 ////                    .accessibilityLabel(String(localized: "SEND_MESSAGE", bundle: .module))
 //                    .font(.title2)
@@ -188,11 +198,17 @@ public struct LLMTextInput: View {
 //            }else
 //            {
 //                Task {
+
+            if !input_text.isEmpty {
                       /*await */aiChatModel.send(message: input_text, image: selectedImage)
                       input_text = ""
                       selectedImage = nil
 //                }
 //            }
+            } else {
+                // open a voice chat view
+                showVoiceView = true
+            }
         }
         
     }

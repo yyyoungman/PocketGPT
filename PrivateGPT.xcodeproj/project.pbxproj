@@ -14,6 +14,7 @@
 		2575C7DE2B85C4C300E832C3 /* AIChatModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2575C7DD2B85C4C300E832C3 /* AIChatModel.swift */; };
 		2575C7E12B85C82B00E832C3 /* LlamaState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2575C7E02B85C82B00E832C3 /* LlamaState.swift */; };
 		2575C7E32B85C92700E832C3 /* LibLlama.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2575C7E22B85C92700E832C3 /* LibLlama.swift */; };
+		258988BF2BAEC95600B9B9FF /* VoiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258988BE2BAEC95600B9B9FF /* VoiceView.swift */; };
 		259BFD242B8F5C6F0067A427 /* LibLlava.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259BFD232B8F5C6F0067A427 /* LibLlava.swift */; };
 		259BFD292B8FFD940067A427 /* llamaforked in Frameworks */ = {isa = PBXBuildFile; productRef = 259BFD282B8FFD940067A427 /* llamaforked */; };
 		259BFD332B9203380067A427 /* BPETokenizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259BFD312B9203380067A427 /* BPETokenizer.swift */; };
@@ -66,6 +67,7 @@
 		2575C7DD2B85C4C300E832C3 /* AIChatModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIChatModel.swift; sourceTree = "<group>"; };
 		2575C7E02B85C82B00E832C3 /* LlamaState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LlamaState.swift; sourceTree = "<group>"; };
 		2575C7E22B85C92700E832C3 /* LibLlama.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibLlama.swift; sourceTree = "<group>"; };
+		258988BE2BAEC95600B9B9FF /* VoiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceView.swift; sourceTree = "<group>"; };
 		259BFD232B8F5C6F0067A427 /* LibLlava.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibLlava.swift; sourceTree = "<group>"; };
 		259BFD2A2B8FFDC70067A427 /* llamaforked */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = llamaforked; path = ../llamaforked; sourceTree = "<group>"; };
 		259BFD312B9203380067A427 /* BPETokenizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BPETokenizer.swift; sourceTree = "<group>"; };
@@ -282,6 +284,7 @@
 				E4EB1CBF2B84F272003DFB9B /* LLMTextInput.swift */,
 				2575C7DD2B85C4C300E832C3 /* AIChatModel.swift */,
 				2503F0762B98084B000E85DD /* ChatListView.swift */,
+				258988BE2BAEC95600B9B9FF /* VoiceView.swift */,
 			);
 			path = Chats;
 			sourceTree = "<group>";
@@ -373,6 +376,7 @@
 				259BFD4D2B9203430067A427 /* MultilingualTextEncoder.swift in Sources */,
 				25D71D642B944C5F0027C9D3 /* RiffWaveUtils.swift in Sources */,
 				259BFD5B2B9203430067A427 /* ControlNet.swift in Sources */,
+				258988BF2BAEC95600B9B9FF /* VoiceView.swift in Sources */,
 				259BFD602B9203430067A427 /* SampleTimer.swift in Sources */,
 				259BFD592B9203430067A427 /* NvRandomSource.swift in Sources */,
 				259BFD622B9203430067A427 /* Scheduler.swift in Sources */,
@@ -571,7 +575,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = TonyC.PrivateGPT;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -610,7 +614,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = TonyC.PrivateGPT;
 				PRODUCT_NAME = "$(TARGET_NAME)";
