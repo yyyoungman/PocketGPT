@@ -19,6 +19,10 @@ final class AIChatModel: ObservableObject {
     private var filename: String = "tinyllama-1.1b-1t-openorca.Q4_0.gguf"
     public var chat_name = "chat1"
     
+    public var numberOfTokens = 0
+    public var total_sec = 0.0
+    public var start_predicting_time = DispatchTime.now()
+
     var sdPipeline: StableDiffusionPipelineProtocol?
 
     private func getFileURL(filename: String) -> URL {
@@ -63,13 +67,13 @@ final class AIChatModel: ObservableObject {
         Task.detached() { // load on background thread, because it takes ~10 seconds
             // TODO: add task cancellation. https://stackoverflow.com/a/71876683
             do {
-//                let resourceURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("sd_turbo")
-                // let resourceURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("sd_turbo_8bit")
-                // get main bundle's "sd_turbo" folder url
-                let resourceURL = Bundle.main.url(forResource: "sd_turbo", withExtension: nil)!
+//                let resourceURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("sd_turbo_att-ori") // load from Documents folder
+                let resourceURL = Bundle.main.url(forResource: "sd_turbo", withExtension: nil)! // load from main bundle
                 let configuration = MLModelConfiguration()
-//                configuration.computeUnits = .cpuOnly
+//                configuration.computeUnits = .all
                 configuration.computeUnits = .cpuAndGPU
+                // count loading time and print
+                let start = DispatchTime.now()
                 let sdPipeline = try StableDiffusionPipeline(resourcesAt: resourceURL,
                                                          controlNet: [],
                                                          configuration: configuration,
@@ -77,7 +81,7 @@ final class AIChatModel: ObservableObject {
                                                          reduceMemory: true)
 //                sleep(6)
                 try sdPipeline.loadResources()
-                print("sdPipeline loaded")
+                print("sdPipeline loading time: \(Double(DispatchTime.now().uptimeNanoseconds - start.uptimeNanoseconds) / 1_000_000_000) seconds")
                 Task { @MainActor in
                     self.sdPipeline = sdPipeline // assign to main actor's variable on main thread
                 }
@@ -211,9 +215,11 @@ final class AIChatModel: ObservableObject {
                 try await Task.sleep(nanoseconds: 1_000_000_000) // 1 second
                 print("waiting for sd pipeline to finish loading")
             }
+            let start = DispatchTime.now()
             let images = try sdPipeline!.generateImages(configuration: config) { progress in
                 return true
             }
+            print("sdPipeline generateImages time: \(Double(DispatchTime.now().uptimeNanoseconds - start.uptimeNanoseconds) / 1_000_000_000) seconds")
             let image = images.compactMap({ $0 }).first
             guard let image else {
                 return nil
@@ -228,7 +234,10 @@ final class AIChatModel: ObservableObject {
     public func send(message in_text: String, image: Image? = nil)  {
         let requestMessage = Message(sender: .user, state: .typed, text: in_text, tok_sec: 0, image: image)
         self.messages.append(requestMessage)
-        self.AI_typing += 1  
+        self.AI_typing += 1
+        self.numberOfTokens = 0
+        self.total_sec = 0.0
+        self.start_predicting_time = DispatchTime.now()
         
         Task {
             var prompt = ""
@@ -270,8 +279,12 @@ final class AIChatModel: ObservableObject {
                         updatedMessages[messageIndex] = message
                         self.messages = updatedMessages
                         self.AI_typing += 1
+                        self.numberOfTokens += 1
                     }
                 )
+                self.total_sec = Double((DispatchTime.now().uptimeNanoseconds - self.start_predicting_time.uptimeNanoseconds)) / 1_000_000_000
+                message.tok_sec = Double(self.numberOfTokens)/self.total_sec
+                print("number of tokens: \(self.numberOfTokens), total time: \(self.total_sec), token/sec: \(message.tok_sec)")
             } else if self.chat_name == "Image Creation" {
                 let pr = prompt
 //                Task.detached() {

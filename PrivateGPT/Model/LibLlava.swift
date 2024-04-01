@@ -10,9 +10,11 @@ import llamaforked
 
 actor LlavaContext {
     private var context: OpaquePointer
+    private var mmproj_path: String
     
-    init(context: OpaquePointer) {
+    init(context: OpaquePointer, mmproj_path: String) {
         self.context = context
+        self.mmproj_path = mmproj_path
     }
     
     static func create_context(model_path: String, mmproj_path: String) throws -> LlavaContext {
@@ -21,12 +23,12 @@ actor LlavaContext {
             print("Could not load context!")
             throw LlamaError.couldNotInitializeContext
         }
-        return LlavaContext(context: llava_cli_context)
+        return LlavaContext(context: llava_cli_context, mmproj_path: mmproj_path)
     }
     
     func set_image(base64: String) {
         let img_prompt = "<img src=\"data:image/jpeg;base64," + base64 + "\">"
-        llamaforked.load_image(context, img_prompt)
+        llamaforked.load_image(self.mmproj_path, context, img_prompt)
     }
     
     func completion_init(text: String) {
