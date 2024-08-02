@@ -2,7 +2,6 @@
 //  FileHelper.swift
 //  PocketGPT
 //
-//  Created by chongyangming on 2024/2/23.
 //
 
 import Foundation

@@ -2,7 +2,6 @@
 //  ChatView.swift
 //  PocketGPT
 //
-//  Created by Limeng Ye on 2024/2/20.
 //
 
 import SwiftUI
@@ -10,22 +9,14 @@ import SwiftUI
 struct ChatView: View {
     
     @EnvironmentObject var aiChatModel: AIChatModel
-//    @EnvironmentObject var orientationInfo: OrientationInfo
     
     @State var placeholderString: String = "Message"
-//    @State private var inputText: String = "Type your message..."
     
     enum FocusedField {
         case firstName, lastName
     }
     
-//    @Binding var model_name: String
-//    @Binding var chat_selection: Dictionary<String, String>?
     @Binding var chat_title: String?
-//    @Binding var title: String
-//    var close_chat: () -> Void
-//    @Binding var add_chat_dialog:Bool
-//    @Binding var edit_chat_dialog:Bool
     @State private var reload_button_icon: String = "arrow.counterclockwise.circle"
     
     @State private var scrollProxy: ScrollViewProxy? = nil
@@ -37,9 +28,6 @@ struct ChatView: View {
     @FocusState private var focusedField: FocusedField?
     
     @Namespace var bottomID
-    
-//    @State private var mode = "Chat"
-//    let modeList = ["Chat", "Image Creation"]
     
     
     @FocusState
@@ -126,32 +114,7 @@ struct ChatView: View {
     
     var body: some View {
         VStack{
-//            HStack {
-//                Spacer()
-//                
-//                Text("Current mode:")
-//                Picker("Choose mode", selection: $mode) {
-//                    ForEach(modeList, id: \.self) {
-//                        Text($0)
-//                    }
-//                }
-//                .pickerStyle(.menu)
-//                .onChange(of: mode) {
-//                    tag in print("Color tag: \(tag)") }
-//
-//                
-//                Spacer()
-//            }
             VStack{
-//                if aiChatModel.state == .loading{
-//                    VStack {
-////                        Text("Model loading...")
-////                            .padding(.top, 5)
-////                            .frame(width: .infinity)
-////                            .background(.regularMaterial)
-//                        ProgressView(value: aiChatModel.load_progress)
-//                    }
-//                }
             }
             ScrollViewReader { scrollView in
                 VStack {
@@ -209,44 +172,12 @@ struct ChatView: View {
                 }, message: {
 //                    Text("The message history will be cleared")
                 })
-//                Button {
-//                    Task {
-////                        self.aiChatModel.chat = nil
-//                        reload_button_icon = "checkmark"
-//                        delayIconChange()
-//                    }
-//                } label: {
-//                    Image(systemName: reload_button_icon)
-//                }
-////                .disabled(aiChatModel.predicting)
-//                //                .font(.title2)
-//                Button {
-//                    Task {
-//                                            //    add_chat_dialog = true
-//                        toggleEditChat = true
-//                        edit_chat_dialog = true
-//                        //                        chat_selection = nil
-//                    }
-//                } label: {
-//                    Image(systemName: "slider.horizontal.3")
-//                }
-                //                .font(.title2)
             }
-//            .navigationTitle(aiChatModel.Title)
             
             LLMTextInput(messagePlaceholder: placeholderString).environmentObject(aiChatModel)
             .focused($focusedField, equals: .firstName)
             
         }
-//        .sheet(isPresented: $toggleEditChat) {
-//            AddChatView(add_chat_dialog: $toggleEditChat,
-//                        edit_chat_dialog: $edit_chat_dialog,
-//                        chat_name: aiChatModel.chat_name,
-//                        renew_chat_list: .constant({}))/*.environmentObject(aiChatModel)*/
-//#if os(macOS)
-//                .frame(minWidth: 400,minHeight: 600)
-//#endif
-//        }
     }
 }
 

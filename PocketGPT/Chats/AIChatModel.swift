@@ -2,7 +2,6 @@
 //  AIChatModel.swift
 //  PocketGPT
 //
-//  Created by chongyangming on 2024/2/21.
 //
 
 import Foundation
@@ -30,14 +29,9 @@ final class AIChatModel: ObservableObject {
     }
     
     init() {
-//        Task {
-////            loadLlama()
-//            loadLlava()
-////            loadSD()
-//        }
     }
     
-    public func prepare(chat_title:String/*chat_selection: Dictionary<String, String>?*/) {
+    public func prepare(chat_title:String) {
 //        let new_chat_name = chat_selection!["title"] ?? "none"
         let new_chat_name = chat_title
         if new_chat_name != self.chat_name {
@@ -114,17 +108,7 @@ final class AIChatModel: ObservableObject {
         } catch let err {
             print("Error: \(err.localizedDescription)")
         }
-        
-//        self.messages = load_chat_history(self.chat_name+".json")!
-//        self.AI_typing = -Int.random(in: 0..<100000)
     }
-    /*
-     tinyllama openorca q4
-     <|im_start|>system\nYou are a helpful chatbot that answers questions.<|im_end|>\n<|im_start|>user\n What is the largest animal on earth?<|im_end|>\n<|im_start|>assistant
-
-     tinyllama q8
-     <|system|>\nYou are a helpful chatbot that answers questions.</s>\n<|user|>\nWhat is the largest animal on earth?</s>\n<|assistant|>
-     */
     
     private func getConversationPromptLlama(messages: [Message]) -> String
     {
@@ -296,23 +280,7 @@ final class AIChatModel: ObservableObject {
                     let image = await self.sdGen(prompt: pr)
                 message.image = image
                 self.AI_typing += 1
-//                    DispatchQueue.main.async {
-//                        var updatedMessages = self.messages
-//                        let messageIndex = self.messages.endIndex - 1
-//                        var m = updatedMessages[messageIndex]
-//                        m.image = image
-//                        updatedMessages[messageIndex] = m
-//                        self.messages = updatedMessages
-//                    }
-//                }
             }
-            
-            
-            // save_chat_history(self.messages, self.chat_name)
-//            let answerMessage = message
-//            Task.detached() {
-//                await save_chat_history([requestMessage, answerMessage], self.chat_name)
-//            }
             save_chat_history([requestMessage, message], self.chat_name)
 
             message.state = .predicted(totalSecond:0)

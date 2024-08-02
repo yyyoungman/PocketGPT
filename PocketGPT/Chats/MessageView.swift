@@ -2,7 +2,6 @@
 //  MessageView.swift
 //  PocketGPT
 //
-//  Created by Limeng Ye on 2024/2/20.
 //
 
 import SwiftUI

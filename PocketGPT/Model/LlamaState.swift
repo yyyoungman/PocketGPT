@@ -2,7 +2,6 @@
 //  LlamaState.swift
 //  PocketGPT
 //
-//  Created by chongyangming on 2024/2/21.
 //
 
 import Foundation
