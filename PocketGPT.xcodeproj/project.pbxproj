@@ -49,7 +49,7 @@
 		25F408B22BA586F2002B73D5 /* whisper in Resources */ = {isa = PBXBuildFile; fileRef = 25F408B12BA586F2002B73D5 /* whisper */; };
 		25F408B42BA58AAB002B73D5 /* llm in Resources */ = {isa = PBXBuildFile; fileRef = 25F408B32BA58AAB002B73D5 /* llm */; };
 		25F408B62BA58C31002B73D5 /* sd_turbo in Resources */ = {isa = PBXBuildFile; fileRef = 25F408B52BA58C31002B73D5 /* sd_turbo */; };
-		E4EB1CAB2B84EF5B003DFB9B /* PrivateGPTApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EB1CAA2B84EF5B003DFB9B /* PrivateGPTApp.swift */; };
+		E4EB1CAB2B84EF5B003DFB9B /* PocketGPTApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EB1CAA2B84EF5B003DFB9B /* PocketGPTApp.swift */; };
 		E4EB1CAF2B84EF60003DFB9B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E4EB1CAE2B84EF60003DFB9B /* Assets.xcassets */; };
 		E4EB1CB22B84EF60003DFB9B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E4EB1CB12B84EF60003DFB9B /* Preview Assets.xcassets */; };
 		E4EB1CBA2B84F0CC003DFB9B /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EB1CB92B84F0CC003DFB9B /* ChatView.swift */; };
@@ -99,12 +99,12 @@
 		25D71D5F2B944C570027C9D3 /* WhisperState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhisperState.swift; sourceTree = "<group>"; };
 		25D71D622B944C5F0027C9D3 /* RiffWaveUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RiffWaveUtils.swift; sourceTree = "<group>"; };
 		25D71D632B944C5F0027C9D3 /* Recorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recorder.swift; sourceTree = "<group>"; };
-		25F408AA2BA5611A002B73D5 /* PrivateGPT.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PrivateGPT.entitlements; sourceTree = "<group>"; };
+		25F408AA2BA5611A002B73D5 /* PocketGPT.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PocketGPT.entitlements; sourceTree = "<group>"; };
 		25F408B12BA586F2002B73D5 /* whisper */ = {isa = PBXFileReference; lastKnownFileType = folder; path = whisper; sourceTree = "<group>"; };
 		25F408B32BA58AAB002B73D5 /* llm */ = {isa = PBXFileReference; lastKnownFileType = folder; path = llm; sourceTree = "<group>"; };
 		25F408B52BA58C31002B73D5 /* sd_turbo */ = {isa = PBXFileReference; lastKnownFileType = folder; path = sd_turbo; sourceTree = "<group>"; };
-		E4EB1CA72B84EF5B003DFB9B /* PrivateGPT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PrivateGPT.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		E4EB1CAA2B84EF5B003DFB9B /* PrivateGPTApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateGPTApp.swift; sourceTree = "<group>"; };
+		E4EB1CA72B84EF5B003DFB9B /* PocketGPT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PocketGPT.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E4EB1CAA2B84EF5B003DFB9B /* PocketGPTApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PocketGPTApp.swift; sourceTree = "<group>"; };
 		E4EB1CAE2B84EF60003DFB9B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E4EB1CB12B84EF60003DFB9B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		E4EB1CB92B84F0CC003DFB9B /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
@@ -235,7 +235,7 @@
 			isa = PBXGroup;
 			children = (
 				259BFD2A2B8FFDC70067A427 /* llamaforked */,
-				E4EB1CA92B84EF5B003DFB9B /* PrivateGPT */,
+				E4EB1CA92B84EF5B003DFB9B /* PocketGPT */,
 				E4EB1CA82B84EF5B003DFB9B /* Products */,
 				253DFFCC2B85D0C000D3BFD1 /* Frameworks */,
 			);
@@ -244,26 +244,26 @@
 		E4EB1CA82B84EF5B003DFB9B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				E4EB1CA72B84EF5B003DFB9B /* PrivateGPT.app */,
+				E4EB1CA72B84EF5B003DFB9B /* PocketGPT.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		E4EB1CA92B84EF5B003DFB9B /* PrivateGPT */ = {
+		E4EB1CA92B84EF5B003DFB9B /* PocketGPT */ = {
 			isa = PBXGroup;
 			children = (
 				25F408B02BA586D5002B73D5 /* Resources */,
-				25F408AA2BA5611A002B73D5 /* PrivateGPT.entitlements */,
+				25F408AA2BA5611A002B73D5 /* PocketGPT.entitlements */,
 				2503F0782B9B36D3000E85DD /* Info.plist */,
 				25D71D5B2B944B9E0027C9D3 /* Whisper */,
 				259BFD2E2B9202D00067A427 /* StableDiffusion */,
 				2575C7DF2B85C81D00E832C3 /* Model */,
 				E4EB1CB82B84F01D003DFB9B /* Chats */,
-				E4EB1CAA2B84EF5B003DFB9B /* PrivateGPTApp.swift */,
+				E4EB1CAA2B84EF5B003DFB9B /* PocketGPTApp.swift */,
 				E4EB1CAE2B84EF60003DFB9B /* Assets.xcassets */,
 				E4EB1CB02B84EF60003DFB9B /* Preview Content */,
 			);
-			path = PrivateGPT;
+			path = PocketGPT;
 			sourceTree = "<group>";
 		};
 		E4EB1CB02B84EF60003DFB9B /* Preview Content */ = {
@@ -292,9 +292,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		E4EB1CA62B84EF5B003DFB9B /* PrivateGPT */ = {
+		E4EB1CA62B84EF5B003DFB9B /* PocketGPT */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E4EB1CB52B84EF60003DFB9B /* Build configuration list for PBXNativeTarget "PrivateGPT" */;
+			buildConfigurationList = E4EB1CB52B84EF60003DFB9B /* Build configuration list for PBXNativeTarget "PocketGPT" */;
 			buildPhases = (
 				E4EB1CA32B84EF5B003DFB9B /* Sources */,
 				E4EB1CA42B84EF5B003DFB9B /* Frameworks */,
@@ -305,12 +305,12 @@
 			dependencies = (
 				25189CB32B8B722B00661B92 /* PBXTargetDependency */,
 			);
-			name = PrivateGPT;
+			name = PocketGPT;
 			packageProductDependencies = (
 				259BFD282B8FFD940067A427 /* llamaforked */,
 			);
-			productName = PrivateGPT;
-			productReference = E4EB1CA72B84EF5B003DFB9B /* PrivateGPT.app */;
+			productName = PocketGPT;
+			productReference = E4EB1CA72B84EF5B003DFB9B /* PocketGPT.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -328,7 +328,7 @@
 					};
 				};
 			};
-			buildConfigurationList = E4EB1CA22B84EF5B003DFB9B /* Build configuration list for PBXProject "PrivateGPT" */;
+			buildConfigurationList = E4EB1CA22B84EF5B003DFB9B /* Build configuration list for PBXProject "PocketGPT" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -344,7 +344,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				E4EB1CA62B84EF5B003DFB9B /* PrivateGPT */,
+				E4EB1CA62B84EF5B003DFB9B /* PocketGPT */,
 			);
 		};
 /* End PBXProject section */
@@ -400,7 +400,7 @@
 				E4EB1CBA2B84F0CC003DFB9B /* ChatView.swift in Sources */,
 				255521AD2B88880500E04438 /* FileHelper.swift in Sources */,
 				259BFD4C2B9203430067A427 /* ResourceManaging.swift in Sources */,
-				E4EB1CAB2B84EF5B003DFB9B /* PrivateGPTApp.swift in Sources */,
+				E4EB1CAB2B84EF5B003DFB9B /* PocketGPTApp.swift in Sources */,
 				259BFD502B9203430067A427 /* DPMSolverMultistepScheduler.swift in Sources */,
 				259BFD5C2B9203430067A427 /* StableDiffusionPipeline.swift in Sources */,
 				2575C7E12B85C82B00E832C3 /* LlamaState.swift in Sources */,
@@ -551,15 +551,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = PrivateGPT/PrivateGPT.entitlements;
+				CODE_SIGN_ENTITLEMENTS = PocketGPT/PocketGPT.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"PrivateGPT/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"PocketGPT/Preview Content\"";
 				DEVELOPMENT_TEAM = 2HTZ423MZ4;
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = PrivateGPT/Info.plist;
+				INFOPLIST_FILE = PocketGPT/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = PocketGPT;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Camera access for selecting images";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Microphone access for voice input";
@@ -577,7 +577,7 @@
 				);
 				MARKETING_VERSION = 1.3;
 				OTHER_LDFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = TonyC.PrivateGPT;
+				PRODUCT_BUNDLE_IDENTIFIER = TonyC.PocketGPT;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -590,15 +590,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = PrivateGPT/PrivateGPT.entitlements;
+				CODE_SIGN_ENTITLEMENTS = PocketGPT/PocketGPT.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"PrivateGPT/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"PocketGPT/Preview Content\"";
 				DEVELOPMENT_TEAM = 2HTZ423MZ4;
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = PrivateGPT/Info.plist;
+				INFOPLIST_FILE = PocketGPT/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = PocketGPT;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Camera access for selecting images";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Microphone access for voice input";
@@ -616,7 +616,7 @@
 				);
 				MARKETING_VERSION = 1.3;
 				OTHER_LDFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = TonyC.PrivateGPT;
+				PRODUCT_BUNDLE_IDENTIFIER = TonyC.PocketGPT;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -627,7 +627,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		E4EB1CA22B84EF5B003DFB9B /* Build configuration list for PBXProject "PrivateGPT" */ = {
+		E4EB1CA22B84EF5B003DFB9B /* Build configuration list for PBXProject "PocketGPT" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E4EB1CB32B84EF60003DFB9B /* Debug */,
@@ -636,7 +636,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E4EB1CB52B84EF60003DFB9B /* Build configuration list for PBXNativeTarget "PrivateGPT" */ = {
+		E4EB1CB52B84EF60003DFB9B /* Build configuration list for PBXNativeTarget "PocketGPT" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				E4EB1CB62B84EF60003DFB9B /* Debug */,

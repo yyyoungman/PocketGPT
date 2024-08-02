@@ -1,6 +1,6 @@
 //
 //  LLMTextInput.swift
-//  PrivateGPT
+//  PocketGPT
 //
 //  Created by Limeng Ye on 2024/2/20.
 //

@@ -1,6 +1,6 @@
 //
 //  VoiceView.swift
-//  PrivateGPT
+//  PocketGPT
 //
 //  Created by chongyangming on 2024/3/23.
 //

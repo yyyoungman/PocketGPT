@@ -1,6 +1,6 @@
 //
-//  PrivateGPTApp.swift
-//  PrivateGPT
+//  PocketGPTApp.swift
+//  PocketGPT
 //
 //  Created by Limeng Ye on 2024/2/20.
 //
@@ -11,7 +11,7 @@ import StoreKit
 let udkey_activeCount = "activeCount"
 
 @main
-struct PrivateGPTApp: App {
+struct PocketGPTApp: App {
     @StateObject var aiChatModel = AIChatModel()
     
 //    @State var add_chat_dialog = false

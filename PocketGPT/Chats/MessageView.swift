@@ -1,6 +1,6 @@
 //
 //  MessageView.swift
-//  PrivateGPT
+//  PocketGPT
 //
 //  Created by Limeng Ye on 2024/2/20.
 //
@@ -12,7 +12,7 @@ struct MessageView: View {
 
     private struct SenderView: View {
         var sender: Message.Sender
-        var current_model = "PrivateGPT"
+        var current_model = "PocketGPT"
         
         var body: some View {
             switch sender {

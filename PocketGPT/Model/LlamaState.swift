@@ -1,6 +1,6 @@
 //
 //  LlamaState.swift
-//  PrivateGPT
+//  PocketGPT
 //
 //  Created by chongyangming on 2024/2/21.
 //
