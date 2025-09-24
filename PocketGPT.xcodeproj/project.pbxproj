@@ -16,7 +16,6 @@
 		2575C7E32B85C92700E832C3 /* LibLlama.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2575C7E22B85C92700E832C3 /* LibLlama.swift */; };
 		258988BF2BAEC95600B9B9FF /* VoiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258988BE2BAEC95600B9B9FF /* VoiceView.swift */; };
 		259BFD242B8F5C6F0067A427 /* LibLlava.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259BFD232B8F5C6F0067A427 /* LibLlava.swift */; };
-		259BFD292B8FFD940067A427 /* llamaforked in Frameworks */ = {isa = PBXBuildFile; productRef = 259BFD282B8FFD940067A427 /* llamaforked */; };
 		259BFD332B9203380067A427 /* BPETokenizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259BFD312B9203380067A427 /* BPETokenizer.swift */; };
 		259BFD342B9203380067A427 /* BPETokenizer+Reading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259BFD322B9203380067A427 /* BPETokenizer+Reading.swift */; };
 		259BFD4C2B9203430067A427 /* ResourceManaging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259BFD352B9203420067A427 /* ResourceManaging.swift */; };
@@ -46,9 +45,8 @@
 		25D71D612B944C570027C9D3 /* WhisperState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D71D5F2B944C570027C9D3 /* WhisperState.swift */; };
 		25D71D642B944C5F0027C9D3 /* RiffWaveUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D71D622B944C5F0027C9D3 /* RiffWaveUtils.swift */; };
 		25D71D652B944C5F0027C9D3 /* Recorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D71D632B944C5F0027C9D3 /* Recorder.swift */; };
-		25F408B22BA586F2002B73D5 /* whisper in Resources */ = {isa = PBXBuildFile; fileRef = 25F408B12BA586F2002B73D5 /* whisper */; };
-		25F408B42BA58AAB002B73D5 /* llm in Resources */ = {isa = PBXBuildFile; fileRef = 25F408B32BA58AAB002B73D5 /* llm */; };
-		25F408B62BA58C31002B73D5 /* sd_turbo in Resources */ = {isa = PBXBuildFile; fileRef = 25F408B52BA58C31002B73D5 /* sd_turbo */; };
+		292216192E83E11700436292 /* llama.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 292216182E83E11700436292 /* llama.xcframework */; };
+		2922161A2E83E11700436292 /* llama.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 292216182E83E11700436292 /* llama.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E4EB1CAB2B84EF5B003DFB9B /* PocketGPTApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EB1CAA2B84EF5B003DFB9B /* PocketGPTApp.swift */; };
 		E4EB1CAF2B84EF60003DFB9B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E4EB1CAE2B84EF60003DFB9B /* Assets.xcassets */; };
 		E4EB1CB22B84EF60003DFB9B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E4EB1CB12B84EF60003DFB9B /* Preview Assets.xcassets */; };
@@ -69,7 +67,6 @@
 		2575C7E22B85C92700E832C3 /* LibLlama.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibLlama.swift; sourceTree = "<group>"; };
 		258988BE2BAEC95600B9B9FF /* VoiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceView.swift; sourceTree = "<group>"; };
 		259BFD232B8F5C6F0067A427 /* LibLlava.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibLlava.swift; sourceTree = "<group>"; };
-		259BFD2A2B8FFDC70067A427 /* llamaforked */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = llamaforked; path = ../llamaforked; sourceTree = "<group>"; };
 		259BFD312B9203380067A427 /* BPETokenizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BPETokenizer.swift; sourceTree = "<group>"; };
 		259BFD322B9203380067A427 /* BPETokenizer+Reading.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BPETokenizer+Reading.swift"; sourceTree = "<group>"; };
 		259BFD352B9203420067A427 /* ResourceManaging.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourceManaging.swift; sourceTree = "<group>"; };
@@ -100,9 +97,7 @@
 		25D71D622B944C5F0027C9D3 /* RiffWaveUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RiffWaveUtils.swift; sourceTree = "<group>"; };
 		25D71D632B944C5F0027C9D3 /* Recorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recorder.swift; sourceTree = "<group>"; };
 		25F408AA2BA5611A002B73D5 /* PocketGPT.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PocketGPT.entitlements; sourceTree = "<group>"; };
-		25F408B12BA586F2002B73D5 /* whisper */ = {isa = PBXFileReference; lastKnownFileType = folder; path = whisper; sourceTree = "<group>"; };
-		25F408B32BA58AAB002B73D5 /* llm */ = {isa = PBXFileReference; lastKnownFileType = folder; path = llm; sourceTree = "<group>"; };
-		25F408B52BA58C31002B73D5 /* sd_turbo */ = {isa = PBXFileReference; lastKnownFileType = folder; path = sd_turbo; sourceTree = "<group>"; };
+		292216182E83E11700436292 /* llama.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = llama.xcframework; sourceTree = "<group>"; };
 		E4EB1CA72B84EF5B003DFB9B /* PocketGPT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PocketGPT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4EB1CAA2B84EF5B003DFB9B /* PocketGPTApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PocketGPTApp.swift; sourceTree = "<group>"; };
 		E4EB1CAE2B84EF60003DFB9B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -118,10 +113,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				259BFD292B8FFD940067A427 /* llamaforked in Frameworks */,
 				253DFFD22B85D43500D3BFD1 /* Metal.framework in Frameworks */,
 				253DFFD02B85D43000D3BFD1 /* Accelerate.framework in Frameworks */,
+				292216192E83E11700436292 /* llama.xcframework in Frameworks */,
 			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2922161B2E83E11700436292 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				2922161A2E83E11700436292 /* llama.xcframework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
@@ -132,6 +138,7 @@
 			children = (
 				253DFFD12B85D43500D3BFD1 /* Metal.framework */,
 				253DFFCF2B85D43000D3BFD1 /* Accelerate.framework */,
+				292216182E83E11700436292 /* llama.xcframework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -221,20 +228,9 @@
 			path = ModelWrapper;
 			sourceTree = "<group>";
 		};
-		25F408B02BA586D5002B73D5 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				25F408B52BA58C31002B73D5 /* sd_turbo */,
-				25F408B32BA58AAB002B73D5 /* llm */,
-				25F408B12BA586F2002B73D5 /* whisper */,
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
 		E4EB1C9E2B84EF5B003DFB9B = {
 			isa = PBXGroup;
 			children = (
-				259BFD2A2B8FFDC70067A427 /* llamaforked */,
 				E4EB1CA92B84EF5B003DFB9B /* PocketGPT */,
 				E4EB1CA82B84EF5B003DFB9B /* Products */,
 				253DFFCC2B85D0C000D3BFD1 /* Frameworks */,
@@ -252,7 +248,6 @@
 		E4EB1CA92B84EF5B003DFB9B /* PocketGPT */ = {
 			isa = PBXGroup;
 			children = (
-				25F408B02BA586D5002B73D5 /* Resources */,
 				25F408AA2BA5611A002B73D5 /* PocketGPT.entitlements */,
 				2503F0782B9B36D3000E85DD /* Info.plist */,
 				25D71D5B2B944B9E0027C9D3 /* Whisper */,
@@ -298,16 +293,15 @@
 			buildPhases = (
 				E4EB1CA32B84EF5B003DFB9B /* Sources */,
 				E4EB1CA42B84EF5B003DFB9B /* Frameworks */,
+				2922161B2E83E11700436292 /* Embed Frameworks */,
 				E4EB1CA52B84EF5B003DFB9B /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				25189CB32B8B722B00661B92 /* PBXTargetDependency */,
 			);
 			name = PocketGPT;
 			packageProductDependencies = (
-				259BFD282B8FFD940067A427 /* llamaforked */,
 			);
 			productName = PocketGPT;
 			productReference = E4EB1CA72B84EF5B003DFB9B /* PocketGPT.app */;
@@ -338,7 +332,6 @@
 			);
 			mainGroup = E4EB1C9E2B84EF5B003DFB9B;
 			packageReferences = (
-				259BFD272B8FFD940067A427 /* XCRemoteSwiftPackageReference "llamaforked" */,
 			);
 			productRefGroup = E4EB1CA82B84EF5B003DFB9B /* Products */;
 			projectDirPath = "";
@@ -354,9 +347,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				25F408B42BA58AAB002B73D5 /* llm in Resources */,
-				25F408B62BA58C31002B73D5 /* sd_turbo in Resources */,
-				25F408B22BA586F2002B73D5 /* whisper in Resources */,
 				E4EB1CB22B84EF60003DFB9B /* Preview Assets.xcassets in Resources */,
 				E4EB1CAF2B84EF60003DFB9B /* Assets.xcassets in Resources */,
 			);
@@ -414,13 +404,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		25189CB32B8B722B00661B92 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			productRef = 25189CB22B8B722B00661B92 /* llamapack */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		E4EB1CB32B84EF60003DFB9B /* Debug */ = {
@@ -577,7 +560,7 @@
 				);
 				MARKETING_VERSION = 1.3;
 				OTHER_LDFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = TonyC.PocketGPT;
+				PRODUCT_BUNDLE_IDENTIFIER = TonyC.PrivateGPT;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -616,7 +599,7 @@
 				);
 				MARKETING_VERSION = 1.3;
 				OTHER_LDFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = TonyC.PocketGPT;
+				PRODUCT_BUNDLE_IDENTIFIER = TonyC.PrivateGPT;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -646,37 +629,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCLocalSwiftPackageReference section */
-		25189CAF2B8B6C6B00661B92 /* XCLocalSwiftPackageReference "../llama.cpp" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = ../llama.cpp;
-		};
-/* End XCLocalSwiftPackageReference section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		259BFD272B8FFD940067A427 /* XCRemoteSwiftPackageReference "llamaforked" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/yyyoungman/llamaforked";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		25189CB22B8B722B00661B92 /* llamapack */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 25189CAF2B8B6C6B00661B92 /* XCLocalSwiftPackageReference "../llama.cpp" */;
-			productName = llamapack;
-		};
-		259BFD282B8FFD940067A427 /* llamaforked */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 259BFD272B8FFD940067A427 /* XCRemoteSwiftPackageReference "llamaforked" */;
-			productName = llamaforked;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = E4EB1C9F2B84EF5B003DFB9B /* Project object */;
 }

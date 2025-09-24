@@ -46,7 +46,7 @@ public struct LLMTextInput: View {
     
 //    @State private var voiceIcon: Image = Image(systemName: "mic")
 //    @State private var isRecording: Bool = false
-    @StateObject var whisperState = WhisperState()
+    // Voice input disabled for chat-only LLM
     
     @State private var sendIcon = "headphones"
     @State private var showVoiceView = false
@@ -117,17 +117,7 @@ public struct LLMTextInput: View {
                 }
             }
             .messageInputViewHeight(messageViewHeight)
-            .onChange(of: selectedItem) {
-                Task {
-                    if let data = try? await selectedItem?.loadTransferable(type: Data.self) {
-                        if let uiImage = UIImage(data: data) {
-                            let base64 = uiImage.jpegData(compressionQuality: 1)?.base64EncodedString() ?? ""
-                            selectedImage = Image(uiImage: uiImage)
-                            aiChatModel.loadLlavaImage(base64: base64)
-                        }
-                    }
-                }
-            }
+            // llava image path removed
 //            .sheet(isPresented: $showVoiceView) {
             .fullScreenCover(isPresented: $showVoiceView) {
                 VoiceView(showModal: self.$showVoiceView) // present full screen modal
@@ -142,7 +132,7 @@ public struct LLMTextInput: View {
                 voiceButtonPressed()
             },
             label: {
-                whisperState.isRecording ? Image(systemName: "stop.circle.fill") : Image(systemName: "mic")
+                Image(systemName: "mic")
             }
         )
         .buttonStyle(.borderless)
@@ -150,10 +140,7 @@ public struct LLMTextInput: View {
     }
     
     private func voiceButtonPressed() {
-        Task {
-            await whisperState.toggleRecord()
-            input_text += whisperState.messageLog
-        }
+        // disabled
     }
     
     private var sendButton: some View {

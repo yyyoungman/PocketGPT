@@ -18,7 +18,7 @@ struct VoiceView: View {
     @Binding var showModal: Bool
     @EnvironmentObject var aiChatModel: AIChatModel
     @State private var mode: Mode = .Listening
-    @StateObject var whisperState = WhisperState()
+    // Whisper disabled
     // Create a speech synthesizer.
     let synthesizer = AVSpeechSynthesizer()
     @State var lastUtterance = AVSpeechUtterance(string: "")
@@ -125,7 +125,8 @@ struct VoiceView: View {
                     while self.showModal {
                         if mode == .Listening {
                             print("[mode] =", mode)
-                            message = await whisperState.getSentence()
+                            // voice input disabled; no recording
+                            message = ""
                             mode = .Thinking
                         } else if mode == .Thinking {
                             // call llama

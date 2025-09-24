@@ -25,10 +25,8 @@ class LlamaState: ObservableObject {
     let NS_PER_S = 1_000_000_000.0
 
     private var llamaContext: LlamaContext?
-    private var llavaContext: LlavaContext?
     private var defaultModelUrl: URL? {
         Bundle.main.url(forResource: "ggml-model", withExtension: "gguf", subdirectory: "models")
-        // Bundle.main.url(forResource: "llama-2-7b-chat", withExtension: "Q2_K.gguf", subdirectory: "models")
     }
 
     init() {
@@ -121,24 +119,6 @@ class LlamaState: ObservableObject {
             messageLog += "Load a model from the list below\n"
         }
     }
-        
-    func loadModelLlava() throws {
-        llavaContext = try LlavaContext.create_context(
-//            model_path: getDocumentsDirectory().appendingPathComponent("llm").appendingPathComponent("MobileVLM-1.7B-ggml-model-q4_k.gguf").path(),
-//            mmproj_path: getDocumentsDirectory().appendingPathComponent("llm").appendingPathComponent("MobileVLM-1.7B-mmproj-model-f16.gguf").path()
-//            model_path: getDocumentsDirectory().appendingPathComponent("llm").appendingPathComponent("MobileVLM_V2-3B-ggml-model-q4_k.gguf").path(),
-//            mmproj_path: getDocumentsDirectory().appendingPathComponent("llm").appendingPathComponent("MobileVLM_V2-3B-mmproj-model-f16.gguf").path()
-            model_path: Bundle.main.url(forResource: "MobileVLM_V2-3B-ggml-model-q4_k", withExtension: "gguf", subdirectory: "llm")!.path(),
-            mmproj_path: Bundle.main.url(forResource: "MobileVLM_V2-3B-mmproj-model-f16", withExtension: "gguf", subdirectory: "llm")!.path()
-        )
-    }
-    
-    func loadLlavaImage(base64: String) async {
-        guard let llavaContext else {
-            return
-        }
-        await llavaContext.set_image(base64: base64)
-    }
 
     private func updateDownloadedModels(modelName: String, status: String) {
         undownloadedModels.removeAll { $0.name == modelName }
@@ -160,9 +140,8 @@ class LlamaState: ObservableObject {
         let n_cur_initial = await llamaContext.n_cur
         while await llamaContext.n_cur < llamaContext.n_len + n_cur_initial {
             let result = await llamaContext.completion_loop()
-            if result == "" {
-                break
-            }
+            if await llamaContext.should_stop() { break }
+            // Allow empty chunks (waiting for valid UTF-8 continuation), only break on stop flag
             messageLog += "\(result)"
             answer += "\(result)"
             DispatchQueue.main.async {
@@ -183,63 +162,7 @@ class LlamaState: ObservableObject {
             """
     }
     
-    func completeLlava(text: String, _ tokenCallback: ((String)  -> ())?) async {
-        guard let llavaContext else {
-            return
-        }
-        print("completion_init")
-        await llavaContext.completion_init(text: text)
-        print("completion_init done")
-
-        var count = 0
-        while count < 256 {
-            let result = await llavaContext.completion_loop(prompt: text)
-//            print("completion_loop: ", result)
-            if result == "" || result == "</s>" {
-                break
-            }
-            DispatchQueue.main.async {
-                tokenCallback?(result)
-            }
-            count += 1
-        }
-
-        await llavaContext.clear()
-    }
-
-    func completeLlavaSentence(text: String, _ tokenCallback: ((String)  -> ())?) async {
-        guard let llavaContext else {
-            return
-        }
-        await llavaContext.completion_init(text: text)
-
-        var count = 0
-        var sentence = ""
-        while count < 256 {
-            if interrupt {
-                interrupt = false
-                break
-            }
-            let result = await llavaContext.completion_loop(prompt: text)
-            if result == "" || result == "</s>" {
-                break
-            }
-            sentence += result
-
-            // Output every sentence
-            if result == "." || result == "?" || result == "!" {
-                let sentenceOut = sentence
-                DispatchQueue.main.async {
-                    tokenCallback?(sentenceOut)
-                }
-                sentence = ""
-            }
-            count += 1
-        }
-
-        await llavaContext.clear()
-        print("completeLlavaSentence done")
-    }
+    // llava integration removed
 
     func stopPredicting() {
         print("llamaState stopPredicting")

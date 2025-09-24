@@ -1,89 +1,27 @@
 import Foundation
-import llamaforked
 
 enum WhisperError: Error {
     case couldNotInitializeContext
 }
 
-// Meet Whisper C++ constraint: Don't access from more than one thread at a time.
+// Stubbed WhisperContext to keep voice UI compiling; no-ops for chat-only mode
 actor WhisperContext {
-    private var context: OpaquePointer
-
-    init(context: OpaquePointer) {
-        self.context = context
-    }
-
-    deinit {
-        whisper_free(context)
-    }
+    init() {}
 
     func fullTranscribe(samples: [Float]) {
-        // Leave 2 processors free (i.e. the high-efficiency cores).
-        let maxThreads = max(1, min(8, cpuCount() - 2))
-        print("Selecting \(maxThreads) threads")
-        var params = whisper_full_default_params(WHISPER_SAMPLING_GREEDY)
-        "en".withCString { en in
-            // Adapted from whisper.objc
-            params.print_realtime   = true
-            params.print_progress   = false
-            params.print_timestamps = true
-            params.print_special    = false
-            params.translate        = false
-            params.language         = en
-            params.n_threads        = Int32(maxThreads)
-            params.offset_ms        = 0
-            params.no_context       = true
-            params.single_segment   = false
-
-            whisper_reset_timings(context)
-            print("About to run whisper_full")
-            samples.withUnsafeBufferPointer { samples in
-                if (whisper_full(context, params, samples.baseAddress, Int32(samples.count)) != 0) {
-                    print("Failed to run the model")
-                } else {
-                    whisper_print_timings(context)
-                }
-            }
-        }
+        // no-op
     }
 
     func getTranscription() -> String {
-        var transcription = ""
-        for i in 0..<whisper_full_n_segments(context) {
-            transcription += String.init(cString: whisper_full_get_segment_text(context, i))
-        }
-        return transcription
+        return ""
     }
 
     static func createContext(path: String) throws -> WhisperContext {
-        var params = whisper_context_default_params()
-#if targetEnvironment(simulator)
-        params.use_gpu = false
-        print("Running on the simulator, using CPU")
-#endif
-        let context = whisper_init_from_file_with_params(path, params)
-        if let context {
-            return WhisperContext(context: context)
-        } else {
-            print("Couldn't load model at \(path)")
-            throw WhisperError.couldNotInitializeContext
-        }
+        return WhisperContext()
     }
 
     static func vad(samples: [Float]) -> Bool {
-        // call public func vad_simple_c(_ data: UnsafeMutablePointer<Float>!, _ length: Int32, _ sample_rate: Int32, _ last_ms: Int32, _ vad_thold: Float, _ freq_thold: Float, _ verbose: Int32) -> Int32
-
-        var samples = samples
-        let sampleRate = 16000
-        let lastMs = 1250
-        let vadThold: Float = 0.6
-        let freqThold: Float = 100
-        let verbose = false
-        let silence = vad_simple_c(&samples, Int32(samples.count), Int32(sampleRate), Int32(lastMs), vadThold, freqThold, verbose ? 1 : 0)
-        return silence == 1
+        // treat as silence so recording stops quickly in stubs
+        return true
     }
-}
-
-fileprivate func cpuCount() -> Int {
-    ProcessInfo.processInfo.processorCount
 }

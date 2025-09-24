@@ -15,7 +15,7 @@ final class AIChatModel: ObservableObject {
     @Published var AI_typing = 0
 
     private var llamaState = LlamaState()
-    private var filename: String = "tinyllama-1.1b-1t-openorca.Q4_0.gguf"
+    private var filename: String = "Qwen3-4B-Instruct-2507-Q4_K_M.gguf"
     public var chat_name = "chat1"
     
     public var numberOfTokens = 0
@@ -49,7 +49,7 @@ final class AIChatModel: ObservableObject {
                 }
                 
                 if self.chat_name == "Chat" {
-                    loadLlava()
+                    self.loadLlama()
                 } else if self.chat_name == "Image Creation" {
                     loadSD()
                 }
@@ -85,21 +85,12 @@ final class AIChatModel: ObservableObject {
         }
     }
     
-    public func loadLlava() {
-        do {
-            try llamaState.loadModelLlava()
-        } catch let err {
-            print("llava loading Error: \(err.localizedDescription)")
-        }
-//        self.messages = load_chat_history(self.chat_name+".json")!
-//        self.AI_typing = -Int.random(in: 0..<100000)
-    }
-        
     public func loadLlama() {
         print("Loading model \(filename)...")
+        // iOS app: look for model in app Documents directory
         let fileURL = getFileURL(filename: filename)
-        if !FileManager.default.fileExists(atPath: fileURL.path) {
-            print("Error: \(fileURL.path) does not exist!")
+        guard FileManager.default.fileExists(atPath: fileURL.path) else {
+            print("Model not found in Documents. Please copy \(filename) into the app's Documents folder via Files app or iTunes File Sharing.")
             return
         }
         do {
@@ -112,23 +103,24 @@ final class AIChatModel: ObservableObject {
     
     private func getConversationPromptLlama(messages: [Message]) -> String
     {
-        // generate prompt from the last n messages
+        // generate prompt from the last n messages using standard ChatML format
         let contextLength = 2
         let numChats = contextLength * 2 + 1
-        var prompt = "<|im_start|>system\nThe following is a friendly conversation between a human and an AI. You are a helpful chatbot that answers questions. Chat history:\n"
+        var prompt = "<|im_start|>system\nYou are a helpful AI assistant.\n<|im_end|>\n"
+        
         let start = max(0, messages.count - numChats)
         for i in start..<messages.count-1 {
             let message = messages[i]
             if message.sender == .user {
-                prompt += "user: " + message.text + "\n"
+                prompt += "<|im_start|>user\n" + message.text + "\n<|im_end|>\n"
             } else if message.sender == .system {
-                prompt += "assistant:" + message.text + "\n"
+                prompt += "<|im_start|>assistant\n" + message.text + "\n<|im_end|>\n"
             }
         }
-        prompt += "<|im_end|>\n"
+        
         let message = messages[messages.count-1]
         if message.sender == .user {
-            prompt += "<|im_start|>user\n" + message.text + "<|im_end|>\n"
+            prompt += "<|im_start|>user\n" + message.text + "\n<|im_end|>\n"
         }
         prompt += "<|im_start|>assistant\n"
         return prompt
@@ -136,28 +128,8 @@ final class AIChatModel: ObservableObject {
     
     private func getConversationPromptLlava(messages: [Message]) -> String
     {
-//        let message = messages[messages.count-1]
-//        return message.text
-        
-        // generate prompt from the last n messages
-        let contextLength = 2 // # rounds
-        let numChats = contextLength * 2 + 1
-        var prompt = "A chat between a curious human and an artificial intelligence assistant. The assistant gives helpful, detailed, and polite answers to the human's questions.\n"
-        let start = max(0, messages.count - numChats)
-        for i in start..<messages.count-1 {
-            let message = messages[i]
-            if message.sender == .user {
-                prompt += "USER: " + message.text + "\n"
-            } else if message.sender == .system {
-                prompt += "ASSISTANT: " + message.text + "\n"
-            }
-        }
-        let message = messages[messages.count-1]
-        if message.sender == .user {
-            prompt += "USER: <image> " + message.text + "\n"
-        }
-        prompt += "ASSISTANT: "
-        return prompt
+        // deprecated (llava removed)
+        return ""
     }
     
 //    private func getConversationPromptLlava(text: String) -> String
@@ -175,9 +147,7 @@ final class AIChatModel: ObservableObject {
     }
 
     public func loadLlavaImage(base64: String) {
-        Task {
-            await llamaState.loadLlavaImage(base64: base64)
-        }
+        // deprecated
     }
     
     private func sdGen(prompt: String) async -> Image? {
@@ -226,8 +196,7 @@ final class AIChatModel: ObservableObject {
         Task {
             var prompt = ""
             if self.chat_name == "Chat" {
-//                let prompt = getConversationPromptLlama(messages: self.messages)
-                prompt = getConversationPromptLlava(messages: self.messages)
+                prompt = getConversationPromptLlama(messages: self.messages)
             } else if self.chat_name == "Image Creation" {
                 prompt = getConversationPromptSD(messages: self.messages)
             }
@@ -238,27 +207,12 @@ final class AIChatModel: ObservableObject {
             
             
             if self.chat_name == "Chat" {
-                // 1. llama
-    //            await llamaState.complete(
-    //                text: prompt,
-    //                { str in
-    //                    message.state = .predicting
-    //                    message.text += str
-    //
-    //                    var updatedMessages = self.messages
-    //                    updatedMessages[messageIndex] = message
-    //                    self.messages = updatedMessages
-    //                    self.AI_typing += 1
-    //                }
-    //            )
-                
-                // 2. llava
-                await llamaState.completeLlava(
+                await llamaState.complete(
                     text: prompt,
                     { str in
                         message.state = .predicting
                         message.text += str
-                        
+
                         var updatedMessages = self.messages
                         updatedMessages[messageIndex] = message
                         self.messages = updatedMessages
@@ -308,14 +262,14 @@ final class AIChatModel: ObservableObject {
         messages_in.append(requestMessage)
         
         var prompt = ""
-        prompt = getConversationPromptLlava(messages: messages_in)
+        prompt = getConversationPromptLlama(messages: messages_in)
 //        print("[prompt into llm]", prompt)
         
         var message = Message(sender: .system, text: "", tok_sec: 0)
         messages_in.append(message)
         let messageIndex = messages_in.endIndex - 1
  
-        await llamaState.completeLlavaSentence(
+        await llamaState.complete(
             text: prompt,
             { str in
                 message.state = .predicting
